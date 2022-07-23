@@ -1,0 +1,40 @@
+{{!-- <form action="/otpverify" method="post">
+    <input type="text" name="otp" id="">
+    <button type="submit">submit</button>
+</form> --}}
+
+
+<section class="vh-100 gradient-custom">
+  <div class="container  h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-6">
+        <div class="card shadow-lg px-3 bg-white rounded" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <div class=" ">
+                
+              <p>The OTP has been sent to your number <br> +91-{{phone}}</p>
+
+              
+<form action="/otpverify" method="post">
+              <div class="form-outline form-white d-flex justify-content-center">
+                <input type="text" name="otp" class="form-control w-50 border border-secondary text-center form-control-md rounded" minlength="6" maxlength="6" required/>
+              </div>
+
+              <button class="btn btn-info btn-md my-3" type="submit">submit</button>
+
+              <div class="form-outline d-flex justify-content-end">
+                <span>Don't recieve the code ? <a class="text-secondary" href="/resendOtp">resend OTP</a></span>
+              </div>
+              {{!-- <p class="secondary">The OTP is valid for only 30 minutes</p> --}}
+</form>
+            </div>
+
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

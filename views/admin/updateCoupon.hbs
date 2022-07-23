@@ -1,0 +1,97 @@
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+
+
+<div class="container">
+
+    <h2 class="mb-5">Add Coupon</h2>
+    {{#each couponData}}
+    <form action="/admin/coupon/update/{{this._id}}" method="post" enctype="multipart/form-data">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="first">Coupon name</label>
+                    <input type="text" name="couponName" class="form-control" value="{{this.couponName}}" placeholder=""
+                        id="first" requird>
+                    {{#if exist}}
+                    <p class="text-danger">Coupon Exist</p>
+                    {{/if}}
+                </div>
+            </div>
+            <!--  col-md-6   -->
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="last">Offer</label>
+                    <input type="text" name="offer" value="{{this.offer}}" class="form-control" placeholder="" id="last"
+                        required>
+                </div>
+            </div>
+            <!--  col-md-6   -->
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="couponExpire">CouponCode</label>
+                    <input type="text" name="couponCode" value="{{this.couponCode}}" class="form-control" placeholder="" required>
+                </div>
+            </div>
+            <!--  col-md-6   -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phone">Coupon Limit</label>
+                    <input type="Number" value="{{this.limit}}" name="limit" class="form-control" id="phone" required>
+                </div>
+            </div>
+            <!--  col-md-6   -->
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="couponExpire">Expiry Date</label>
+
+                    <input type="text" name="expiry" value="{{this.expiry}}" class="form-control" placeholder=""
+                        id="expire" required>
+
+                </div>
+            </div>
+        </div>
+            <!--  row   -->
+            <div class="form-row form_img">
+                <div class="grid">
+                    <div class="form-element">
+                        <input type="file" id="file-1" accept="image/*" name="Image" required>
+                        <label for="file-1" id="file-1-preview">
+                            <img src="/uploads/{{this.image}}" class="w-100 h-100" alt="">
+                            <div>
+                                <span>+</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <button type="submit" class="btn btn-success mt-4">Submit</button>
+    </form>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<link rel="stylesheet" href="/Admin/css/style.css">
+<script src="/Admin/js/custom.js"></script>
+<script>
+
+    flatpickr(
+        '#expire',
+        {
+            altInput: true,
+            minDate: new Date(),
+            allowInput: true,
+            altFormat: 'F j, Y',
+            dateFormat: 'Y-m-d',
+            disableMobile: 'true',
+        })
+</script>

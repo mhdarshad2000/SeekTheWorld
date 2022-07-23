@@ -1,0 +1,63 @@
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h2>Users</h2>
+            <div class="table-responsive">
+              <table class="table table-hover" id="category_table">
+                <tr id="table">
+
+                  <th scope="col">Number</th>
+                  <th scope="col">Name</th>
+                  <th>Coupon</th>
+                  <th>Offer</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Expires On</th>
+                  <th>Limit</th>
+                  <th>Image</th>
+                  <th scope="col"></th>
+                  <th></th>
+                  <thead>
+
+                  </thead>
+                  <tbody>
+                    {{#each coupon}}
+
+                    <tr>
+                      <td>{{inc @index}}</td>
+                      <td>{{this.couponName}}</td>
+                      <td>{{this.couponCode}}</td>
+                      <td>{{this.offer}}</td>
+                      <td>{{this.created}}</td>
+                      <td>{{this.expiry}}</td>
+                      <td>{{this.limit}}</td>
+                      <td><img src="/uploads/{{this.image.[0]}}" alt=""></td>
+
+                    <td><a class="btn btn-primary" href="/admin/coupon/update/{{this._id}}" >Update</a></td>
+                    <td><button class="btn btn-danger mx-3" onclick="deleteCoupon('{{this._id}}')">Delete
+                        </button></td>
+                    </tr>
+                   
+
+                    {{/each}}
+
+
+
+                  </tbody>
+
+              </table>
+
+              <!-- content-wrapper ends -->
+
+            </div>
+            <!-- main-panel ends -->
+          </div>
+          <!-- page-body-wrapper ends -->
+        </div>
+
+<script src="/Admin/js/custom.js"></script>
+
+

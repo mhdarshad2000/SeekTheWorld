@@ -1,0 +1,63 @@
+<!-- validate jquery-->
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-8 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover" id="category">
+                <thead>
+                  <tr>
+                    <th scope="col">index</th>
+                    <th scope="col">category</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each category}}
+                  <tr>
+                    <td>{{inc @index}}</td>
+                    <td>{{this.categoryName}}</td>
+                    <td class="d-flex d-flex justify-content-end">
+                      <button class="btn btn-primary mx-3" data-toggle="modal"
+                        data-target="#editmodal{{this._id}}">Update</button>
+                      <a class="btn btn-danger" onclick="deleteCategory('{{this._id}}')">Delete</a>
+                      <div class="modal" id="editmodal{{this._id}}" tabindex="-1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                              <form action="/admin/category/edit/{{this._id}}" method="post">
+                              <div class="form-group row d-flex justify-content-center">
+                                <label for="updateCategory" class="col-sm-2 col-form-label">Category</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="category" id="updateCategory"
+                                      placeholder="{{this.categoryName}}" class="form-control">
+                                </div>
+                                <button class="btn btn-primary btn-sm btn-center mt-4" type="submit">Update</button>
+                              </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/Admin/js/custom.js"></script>
+
+<style>
+  .error {
+    color: red;
+  }
+</style>

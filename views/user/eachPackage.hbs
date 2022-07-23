@@ -1,0 +1,210 @@
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<!-- Shop Details Section End -->
+<link rel="stylesheet" href="/userElem/css/single.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.6.0/tiny-slider.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <style>
+        .container{
+            max-width: 1200px;
+        }
+        .content{
+            max-width: 1361px;
+        }
+
+    </style>
+    <div class="container">
+        <div class="row">
+            {{#each packageInfo}}
+            <div class="col-lg-6">
+                <div class="c-product-container d-block mt-0">
+                    <div class="c-product-container_element c-product-container_element--images">
+                        <div class="c-product-image-viewer">
+                            <div class="c-product-image-viewer__carousel">
+                                <div class="o-slider-image-viewer">
+                                    <ul class="o-slider-image-viewer__inner js-sliderImageViewer">
+                                        {{#each Image}}
+                                        <li class="o-slider-image-viewer__slide">
+                                            <img class="c-product-image-viewer__image" src="/uploads/{{this}}">
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                    <div class="o-slider-image-viewer__nav js-imageViewerNav">
+                                        {{#each Image}}
+                                        <span class="o-slider-image-viewer__dot">
+                                            <img class="o-slider-image-viewer__dot-image" src="/uploads/{{this}}">
+                                        </span>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- script for slide image --}}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.6.0/min/tiny-slider.js"></script>
+            <script>
+                var slider = tns({
+                    arrowKeys: true,
+                    container: ".js-sliderImageViewer",
+                    controls: false,
+                    loop: false,
+                    mouseDrag: true,
+                    navContainer: ".js-imageViewerNav",
+                });
+            </script>
+
+            <div class="col-lg-6">
+                <div class="product__details__text">
+                    <h2 class="text-left">{{this.name}}</h2>
+
+                    <h4 class="text-left mt-3">₹ {{this.price.child}} - ₹ {{this.price.adult}}</h4>
+
+                </div>
+                <div class="product__details__option mt-5">
+                    <input type="text" value="{{this.days}}" id="days" hidden>
+                    <form action="/booking" method="post" id="booking">
+                        <div class="form-group d-flex">
+                            <div class="d-flexflex flex-column mr-3">
+                                <label for="myID"><span class="text text-dark">Boarding Date</span> </label>
+                                <input type="text" class="form-control  mb-4" placeholder="Boarding Date" name="date"
+                                    id="myID" required>
+                            </div>
+                            <div class="d-flexflex flex-column">
+                                <label for="myID"><span class="text text-dark">Return Date </span></label>
+                                <input type="text" class="form-control  mb-4" placeholder="return Date" name="destdate"
+                                    id="myID2" required>
+                            </div>
+                        </div>
+
+                        <div class="product__details__cart__option">
+                            <div class="quantity">
+                                <label for="">Adult</label>
+                                <div class="pro-qty">
+                                    <input type="Number" name="adultCount" value="1" required>
+                                </div>
+                            </div>
+                            <div class="quantity">
+                                <label for="">Child</label>
+                                <div class="pro-qty">
+                                    <input type="Number" name="childCount" value="0" required>
+                                </div>
+                            </div>
+                            <input type="text" name="package" value="{{this._id}}" hidden>
+                            <div class="col d-grid">
+                                <button type="submit" class="btn btn-success btn-lg mt-5">Place Order</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="product__details__last__option">
+                    <ul>
+                        <li><span>Category:</span> {{this.category.categoryName}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+            
+
+    <div class="container content">
+        <div class="row ">
+            <h3>Description</h3>
+            <p>{{this.description}}</p>
+            {{/each}}
+        </div>
+    </div>
+    
+    <br>
+    <br>
+    <div class="d-flex justify-content-center">
+        <hr class="w-75 text-center">
+    </div>
+
+    <br>
+
+    <div class="container content">
+        <div class="row ">
+
+
+            <h3 class="ml-5 pl-5 mb-4">Related Package</h3>
+            <br>
+            <div class="col-lg-12 ">
+                <div id="rlFilter" class="row ">
+
+                    {{#each relatedPackage}}
+                    <div class="col-md-4 mb-4">
+                        <div class="card overflow-hidden shadow"><span
+                                class="badge badge-pill badge-danger position-absolute fs-5 pl-3 pr-3 pt-2 pb-2 mt-2 ml-2">Related</span>
+                            <img class="card-img-top" src="/uploads/{{this.Image.[0]}}" alt="" style="height: 25rem;" />
+                            <div class="card-body py-4 px-3">
+                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                    <h4 class="text-secondary fw-medium"><a class=" text-decoration-none"
+                                            href="/fetchpackage/{{this._id}}">{{this.name}}</a></h4><span
+                                        class="fs-1 fw-medium">₹ {{this.price.adult}}</span>
+                                </div>
+                                <div class="d-flex align-items-center"> <span class="fs-0 fw-medium">{{this.days}} Days
+                                        Trip</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+
+        $('.increment-btn').click(function (e) {
+            e.preventDefault();
+            var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(incre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value < 10) {
+                value++;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+
+        });
+
+        $('.decrement-btn').click(function (e) {
+            e.preventDefault();
+            var decre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(decre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value > 1) {
+                value--;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+        });
+
+    });
+
+
+</script>
+<!-- Product Details Section End -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/user.js"></script>
+
+<script>
+  $("#booking").validate();
+</script>

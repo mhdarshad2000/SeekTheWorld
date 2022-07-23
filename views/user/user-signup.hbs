@@ -1,0 +1,111 @@
+<!-- validate jquery-->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+      
+<div class="container">
+
+<section class="h-100 bg-image">
+  <div class="mask d-flex align-items-center h-75 gradient-custom-3">
+    <div class="container h-75">
+      <div class="row d-flex justify-content-center align-items-center h-75">
+        <div class="col-12 col-md-9 col-lg-9 col-xl-7">
+          <div class="card shadow-sm px-3 bg-white rounded" style=" border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-3">signup</h2>
+
+              <form name="userSignup" action="/signup" method="post" id="userSignup">
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="name">Your Name</label>
+                  <input type="text" id="name" name="name" minlength="4" required class="form-control form-control-lg" />
+                  
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="email">Your Email</label>
+                  <input type="email" id="email" name="email" minlength="4" required class="form-control form-control-lg" />
+                  {{#if exist}}
+                  <h5 class="text-danger text-capitalize">Email already exists</h5>
+                  {{/if}}
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="name">Phone Number</label>
+                  <input type="text" id="Number" name="phone" minlength="10" maxlength="10" required class="form-control form-control-lg" />
+                  
+                </div>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="password">Password</label>
+                  <input type="password" id="password" name="password" minlength="4" required class="form-control form-control-lg" />
+                  
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="conpassword">Repeat your password</label>
+                  <input type="password" id="conpassword" name="con-password" minlength="4" required class="form-control form-control-lg" />
+                  
+                  
+
+    {{!--  Validate Confirm Password --}}
+                  <h6 id="conpasscheck" style="color: red;">
+                        Password didn't match
+                    </h6>
+
+
+                </div>
+
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+
+                
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+
+
+              {{!-- validation --}}
+
+<script>
+    $("#userSignup").validate();
+
+    // Validate Confirm Password
+  $("#conpasscheck").hide();
+  let confirmPasswordError = true;
+  $("#conpassword").keyup(function () {
+    validateConfirmPassword();
+  });
+  function validateConfirmPassword() {
+    let confirmPasswordValue = $("#conpassword").val();
+    let passwordValue = $("#password").val();
+    if (passwordValue != confirmPasswordValue) {
+      $("#conpasscheck").show();
+      $("#conpasscheck").html("Password didn't Match");
+      $("#conpasscheck").css("color", "red");
+      confirmPasswordError = false;
+      return false;
+    } else {
+      $("#conpasscheck").hide();
+    }
+  }
+</script>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<style>
+  .error{
+    color:red;
+  }
+</style>

@@ -1,0 +1,142 @@
+<div class="container" style="min-height: 50vh;">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Upcomming</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Cancelled</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">completed</a>
+  </li>
+</ul>
+<div class="container" style="min-height: 50px;">
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <table class="table text-dark">
+  <thead>
+    <tr></tr>
+      <th scope="col">Package</th>
+      <th scope="col">Boarding Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Total Price</th>
+      <th scope="col"></th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    
+    {{#each active}}
+    <tr>
+      <th scope="col">{{this.packages.name}}</th>
+      <td>{{this.boarding}}</td>
+      <td>{{this.return}}</td>
+      <td>{{this.booking.totalPrice}}</td>
+      <td><a href="/booking/view/{{this._id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+</svg></a></td>
+      <td><span class="badge badge-pill badge-primary">Active</span></td>
+    </tr>
+    {{/each}}
+</table>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <table class="table text-dark">
+  <thead>
+    <tr></tr>
+      <th scope="col">Package</th>
+      <th scope="col">Boarding Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Total Price</th>
+      <th></th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody class="mt-5">
+    {{#each upcoming}}
+    <tr>
+      <th scope="col">{{this.packages.name}}</th>
+      <td>{{this.boarding}}</td>
+      <td>{{this.return}}</td>
+      <td>{{this.booking.totalPrice}}</td>
+      <td><a href="/booking/view/{{this.booking._id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+</svg></a></td>
+      <td>{{this.booking.status}}</td>
+      <td><a href="/booking/cancel/{{this.booking._id}}" class="btn btn-danger">Cancel</a></td>
+    </tr>
+    {{/each}}
+</table>
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <table class="table text-dark">
+  <thead>
+    <tr></tr>
+      <th scope="col">Package</th>
+      <th scope="col">Boarding Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Total Price</th>
+      <th></th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    
+    {{#each cancelled}}
+    <tr>
+      <th scope="col">{{this.packages.name}}</th>
+      <td>{{this.boarding}}</td>
+      <td>{{this.return}}</td>
+      <td>{{this.booking.totalPrice}}</td>
+      <td><a href="/booking/view/{{this.booking._id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+</svg></a></td>
+      <td><span class="badge badge-pill badge-danger">cancelled</span></td>
+    </tr>
+    {{/each}}
+</table>
+  </div>
+
+<div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+    <table class="table text-dark">
+  <thead>
+    <tr></tr>
+      <th scope="col">Package</th>
+      <th scope="col">Boarding Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Total Price</th>
+      <th></th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    
+    {{#each completed}}
+    <tr>
+      <th scope="col">{{this.packages.name}}</th>
+      <td>{{this.boarding}}</td>
+      <td>{{this.return}}</td>
+      <td>{{this.booking.totalPrice}}</td>
+      <td><a href="/booking/view/{{this.booking._id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+</svg></a></td>
+      <td><span class="badge badge-pill badge-success">Completed</span></td>
+    </tr>
+    {{/each}}
+</table>
+  </div>
+
+</div>
+</div>
+</div>

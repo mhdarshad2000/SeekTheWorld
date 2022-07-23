@@ -1,0 +1,98 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<section>
+    <div class="container col-md-12 mt-4">
+        <div class="row">
+            <div class="col-md-12 text-dark fs-4 fw-bold">
+                <h2 class="text-center">Add Package</h2>
+                <form action="/admin/add-package" method="post" id="add-product" enctype="multipart/form-data">
+                    <div class="form-outline mb-4">
+                        <label for="name">Name</label>
+                        <input type="text" name="Name" id="name" class="form-control" minlength="3" required>
+                    </div>
+                   <div class="form-group">
+                    <label for="exampleFormControlSelect2">Category</label>
+                    <select class="form-control" name="Category" id="exampleFormControlSelect2" required>
+                    {{#each category}}
+                      <option value="{{this._id}}">{{this.categoryName}}</option>
+                    {{/each}}
+                    <option></option>
+                    </select>
+                  </div>
+                    <div class="form-outline">
+                        <label for="description">Description</label>
+                        <input type="text" name="Description" class="form-control" id="description" required>
+                    </div>
+                    <div class="form-outline">
+                        <label for="price">Price for Adult</label>
+                        <input type="number" name="adult" id="price" class="form-control" required>
+                    </div>
+                    <div class="form-outline">
+                        <label for="price">Price for child</label>
+                        <input type="number" name="child" id="price" class="form-control" required>
+                    </div>
+                    <div class="form-outline">
+                        <label for="days">Duration</label>
+                        <input type="number" name="Duration" class="form-control" id="days" required>
+                    </div>
+                    <div class="form-row form_img">
+                                    <div class="grid">
+                                        <div class="form-element">
+                                            <input type="file" id="file-1" accept="image/*" name="Image">
+                                            <label for="file-1" id="file-1-preview">
+                                                <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input type="file" id="file-2" accept="image/*" name="Image">
+                                            <label for="file-2" id="file-2-preview">
+                                                <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input type="file" id="file-3" accept="image/*" name="Image">
+                                            <label for="file-3" id="file-3-preview">
+                                                <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input type="file" id="file-4" accept="image/*" name="Image">
+                                            <label for="file-4" id="file-4-preview">
+                                                <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                    <button type="submit" class="btn btn-success mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<link rel="stylesheet" href="/Admin/css/style.css">
+
+<script src="/Admin/js/custom.js"></script>
+<script>
+    $("#add-product").validate();
+</script>

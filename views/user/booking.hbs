@@ -1,0 +1,208 @@
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Check Out</h4>
+                    <div class="breadcrumb__links">
+                        <a href="./index.html">Home</a>
+                        <a href="./shop.html">Shop</a>
+                        <span>Check Out</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+            <form id="book">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="d-flex justify-content-between coupon__code">
+
+
+                            <h5>Have a coupon? <span><a data-toggle="modal" data-target="#coupon">Click
+                                        to apply
+                                    </a></span> </h5>
+                            {{#if couponName}}
+                            <p style="font-size: 1em;">You have applied the coupon {{couponName.couponName}} <a
+                                    class="border-0" type="submit" onclick="removeCoupon()"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-x" viewBox="0 0 16 16">
+                                        <path
+                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                    </svg></a></p>
+                            {{/if}}
+
+                        </div>
+                        <h6 class="checkout__title">Booking Details</h6>
+                        <div class="alert alert-warning">
+                            You can Edit these Details from your Profile.
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Full Name</p>
+                                    <input id="user" type="text" value="{{user.name}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Passport Number</p>
+                                    <input type="text" value="{{user.passportNumber}}" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Phone</p>
+                                    <input id="phone" type="text" value="{{user.phone}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email</p>
+                                    <input type="text" id="email" value="{{user.email}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Package</p>
+                                    <input type="text" value="{{packageDetails.name}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Category</p>
+                                    <input type="text" value="{{packageDetails.category.[0].categoryName}}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4 class="order__title">Your order</h4>
+                            <div class="checkout__order__products mb-2">Product <span>Total</span></div>
+                            <ul class="checkout__total__products">
+                                <li>Adults <span>{{amount.adultTotal}}</span></li>
+                                <li>Childs <span>{{amount.childTotal}}</span></li>
+                                <hr>
+                                <li>Sub Total <span>{{amount.subTotal}}</span></li>
+
+                            </ul>
+                            <ul class="checkout__total__all">
+                                <li>Discount <span>{{amount.discount}}</span></li>
+                                <li>Tax (10%)<span>{{amount.tax}}</span></li>
+                                <li>Total <span>{{amount.totalPrice}}</span></li>
+
+                            </ul>
+
+                            <p>The Amount is calculated on the basis of the current GST rates and the 
+                                GST is calculated in 18% of the subTotal And the discount is calculated on
+                                 the basis of coupons applied by the user</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment"
+                                    id="payment1">
+                                <label class="form-check-label" for="payment1">
+                                    Partial Payment
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment"
+                                    id="payment2" checked>
+                                <label class="form-check-label" for="payment2">
+                                    Full Payment
+                                </label>
+                            </div>
+                            <input type="text" name="coupon" value="{{couponName._id}}" hidden>
+                            <input type="text" name="package" value="{{packageDetails._id}}" hidden>
+                            <input type="text" name="totalPrice" value="{{amount.totalPrice}}" id="" hidden>
+                            <button type="submit" class="site-btn">PLACE ORDER</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class='modal fade bd-example-modal-lg' id='coupon' tabindex='-1' role='dialog'
+                aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                <div class='modal-dialog mx-auto modal-lg' style='width:1000px ;' role='document'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h5 class='modal-title' id='exampleModalLabel'>Add coupons</h5>
+                            <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <div class='modal-body'>
+                            {{#each coupon}}
+                            <div class='form_container col-4 col-sm-12'>
+                                <div class='p-0 shadow-lg p-3 mb-5 bg-white mb-4 card' style="border-radius: 1rem;">
+                                    <div class='card-body'>
+                                        <div class='row d-flex justify-content-between align-items-center'>
+                                            <div class='col-12 d-flex justify-content-center'>
+                                                <large class='mb-2 coupon-header'>{{this.couponName}}
+                                                </large>
+                                            </div>
+                                            <div>
+                                                <div class="d-flex flex-column">
+                                                    <div>
+                                                    </div>
+                                                    <small class='mb-0 coupon-footer'>Coupon code:</small>
+                                                    <small>{{this.couponCode}}</small>
+                                                </div>
+
+                                            </div>
+                                            <div>
+                                                <small class='mb-0 coupon-footer'>Discount:
+                                                    {{this.offer}}%</small>
+                                            </div>
+                                            <div>
+                                                <div class="d-flex flex-column">
+                                                    <div>
+                                                    </div>
+                                                    <button type="submit" onclick="applyCoupon('{{this._id}}')"
+                                                        class='text-light btn btn-danger mt-2'>Apply now</button>
+                                                    <small class="mt-2">
+                                                        Coupon Expires On {{this.expiry}}
+                                                    </small>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+</div>
+</div>
+</section>
+
+
+<script>
+    
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script src="/userElem/js/payment.js"></script>
+
+{{!--
+<link rel="stylesheet" href="/style.css"> --}}

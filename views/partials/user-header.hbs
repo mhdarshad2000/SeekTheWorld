@@ -1,0 +1,98 @@
+
+    <!-- Page Preloder -->
+    {{!-- <div id="preloder">
+        <div class="loader"></div>
+    </div> --}}
+
+        <div class="container-fluid px-5">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="header__logo">
+                        <a href="/">Seek TheWorld</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="/package">Packages</a></li>
+                            <li><a href="/myBookings">My Bookings</a></li>
+                            <li><a href="/myWishlists">My Wishlists</a></li>
+                            <li><a href="/aboutUs">About Us</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="header__nav__option">
+
+                        {{#if login}}
+                        <a href="/logout">logout</a>
+                        <a href="/profile"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+</svg></a>
+                        {{else}}
+                        <a class="btn btn-success" href="/login">Login</a>
+                        <a class="btn btn-success" href="/signup">Signup</a>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    {{{body}}}
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="/"><h3>Seek The World</h3></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Categories</h6>
+                        <ul>
+                            <li><a href="#">Honey Moon</a></li>
+                            <li><a href="#">Family Tours</a></li>
+                            <li><a href="#">Vacation</a></li>
+                            <li><a href="#">Desert</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Easy Payment</a></li>
+                            <li><a href="#">Simple Refunds</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Keep In Touch With Us We are free to help you at every time</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+

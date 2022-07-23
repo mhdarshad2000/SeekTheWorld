@@ -1,0 +1,39 @@
+<div class="col-12 mt-5 pt-5 ">
+
+
+    <div class="container mt-5 pt-3">
+
+        <div class="mb-7 text-center">
+            <h5 class="text-secondary">Our Packages</h5>
+            <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">Top Destinations</h3>
+        </div>
+        <div class="row" id="products">
+            {{#each search}}
+            <div class="col-md-4 mb-4">
+                <div class="card overflow-hidden shadow h-100">
+                    <a href="/fetchpackage/{{this._id}}"><img class="card-img-top" src="/uploads/{{this.Image.[0]}}" height="400rem" alt="Rome, Italty" /></a>
+                    <div class="card-body py-4 px-3">
+                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                            <h4 class="text-secondary fw-medium">
+                                <a class="link-900 text-decoration-none stretched-link"
+                                    href="/fetchpackage/{{this._id}}">{{this.name}}</a>
+                            </h4><span class="fs-1 fw-medium"><span style="font-family:Times New Roman;">₹</span>
+                                {{this.price.adult}}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="fs-0 fw-medium">{{this.days}} DaysTrip</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+
+        </div>
+    </div><!-- end of .container-->
+
+</div>
+</div>
+</div>
+</section>
+<script>

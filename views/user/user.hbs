@@ -1,0 +1,47 @@
+
+
+<section class="hero">
+        <div class="hero__slider owl-carousel">
+			{{#each banner}}
+            <div class="hero__items" style="background-image: url('/uploads/{{this.Banner.images.[0]}}') ;background-repeat: no-repeat;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h2>{{this.Banner.hero_title}}</h2>
+                                <a href="/package" class="primary-btn">{{this.Banner.hero_button}}<span class="arrow_right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+					{{/each}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pl-5 pr-5">
+    <div class="container-fluid pl-5 pr-5">
+        <div class="col pl-5 pr-5">
+                <div id="rlFilter" class="row pl-5 pr-5">
+                    {{#each newPackages}}
+                    <div class="col-md-4 mb-4">
+                        <div class="card overflow-hidden shadow"><span class="badge badge-pill badge-danger position-absolute fs-5 pl-3 pr-3 pt-2 pb-2 mt-2 ml-2" >New</span> <img class="card-img-top"
+                                src="/uploads/{{this.Image.[0]}}" alt="" style="height: 25rem;" />
+                            <div class="card-body py-4 px-3">
+                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                    <h4 class="text-secondary fw-medium"><a
+                                            class=" text-decoration-none"
+                                            href="/fetchpackage/{{this._id}}">{{this.name}}</a></h4><span
+                                        class="fs-1 fw-medium">₹ {{this.price.adult}}</span>
+                                </div>
+                                <div class="d-flex align-items-center"> <span class="fs-0 fw-medium">{{this.days}} Days
+                                        Trip</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+    </div>
+</section>
+    <!-- Hero Section End -->

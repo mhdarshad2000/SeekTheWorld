@@ -1,0 +1,146 @@
+/**
+ * Pen Resets
+ */
+ * {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+ * Content Wrapper
+ */
+.o-wrapper {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/**
+ * Slider Product Trays
+ */
+.o-slider-image-viewer {
+  position: relative;
+}
+
+.o-slider-image-viewer__inner {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.o-slider-image-viewer__slide {
+  list-style: none;
+  text-align: center;
+}
+
+.o-slider-image-viewer__nav {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.o-slider-image-viewer__dot {
+  background-color: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  height: 12px;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 12px;
+}
+.o-slider-image-viewer__dot:focus {
+  outline: 0;
+}
+.o-slider-image-viewer__dot.tns-nav-active {
+  background-color: #aaa;
+  cursor: default;
+}
+
+@media screen and (min-width: 900px) {
+  .o-slider-image-viewer__dot {
+    align-items: center;
+    background-color: transparent;
+    border-radius: 0;
+    border: 1px solid transparent;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    padding: 3px;
+    width: 150px;
+  }
+  .o-slider-image-viewer__dot.tns-nav-active {
+    background-color: transparent;
+    border-color: #aaa;
+  }
+}
+@media screen and (max-width: 899px) {
+  .o-slider-image-viewer__dot-image {
+    display: none;
+  }
+}
+/**
+ * Product Image Viewer
+ */
+.c-product-image-viewer__image {
+  max-height: calc(90vh - 96px);
+}
+
+.c-product-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -96px;
+  margin-top: 96px;
+  margin-bottom: 96px;
+}
+
+.c-product-container__element {
+  flex-basis: 100%;
+  padding-left: 96px;
+  text-align: center;
+}
+
+.c-product-container__element--details {
+  margin-top: 48px;
+}
+
+@media screen and (min-width: 900px) {
+  .c-product-container__element {
+    flex-basis: 50%;
+  }
+
+  .c-product-container__element--images {
+    text-align: right;
+  }
+
+  .c-product-container__element--details {
+    text-align: left;
+    margin-top: 0;
+  }
+}
+.c-product-name {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+@media screen and (min-width: 900px) {
+  .c-product-name {
+    margin-bottom: 24px;
+  }
+}

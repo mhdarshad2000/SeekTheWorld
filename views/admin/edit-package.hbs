@@ -1,0 +1,180 @@
+<!-- validate jquery-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<section>
+    <div class="container col-md-7 mt-4">
+        <div class="row">
+            <div class="col-md-12 text-dark fs-4 fw-bold">
+                <h2 class="text-center">Edit Package</h2>
+                {{#each editElem}}
+                <form action="/admin/package/edit/{{this._id}}" method="post" id="edit-package" enctype="multipart/form-data">
+                    
+                    <div class="form-outline mb-4">
+                        <label for="name">Name</label>
+                        <input type="text" value="{{this.name}}" name="Name" id="name" class="form-control"
+                            minlength="3" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect2">Category</label>
+                        <select class="form-control" name="Category" id="exampleFormControlSelect2">
+                            <option value="{{this.category._id}}">{{this.category.categoryName}}</option>
+                            {{#each ../cat}}
+                            <option value="{{this._id}}">{{this.categoryName}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-outline">
+                        <label for="description">Description</label>
+                        <input type="text" value="{{this.description}}" name="Description" class="form-control"
+                            id="description" required>
+                    </div>
+                    <div class="form-outline">
+                        <label for="price">Price for Adult</label>
+                        <input type="number" name="adult" value="{{this.price.adult}}" id="price" class="form-control"
+                            required>
+                    </div>
+                    <div class="form-outline">
+                        <label for="price">Price for child</label>
+                        <input type="number" name="child" value="{{this.price.child}}" id="price" class="form-control"
+                            required>
+                    </div>
+                    <div class="form-outline">
+                        <label for="days">Duration</label>
+                        <input type="number" value="{{this.days}}" name="Duration" class="form-control" id="days"
+                            required>
+                    </div>
+                    <div class="form-row form_img">
+                        <div class="grid">
+                            <div class="form-element">
+                                <input type="file" id="file-1" accept="image/*" name="Image">
+                                <label for="file-1" id="file-1-preview">
+                                    <img src="/uploads/{{this.Image.[0]}}" alt="">
+                                    <div>
+                                        <span>+</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-element">
+                                <input type="file" id="file-2" accept="image/*" name="Image">
+                                <label for="file-2" id="file-2-preview">
+                                    <img src="/uploads/{{this.Image.[1]}}" alt="">
+                                    <div>
+                                        <span>+</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-element">
+                                <input type="file" id="file-3" accept="image/*" name="Image">
+                                <label for="file-3" id="file-3-preview">
+                                    <img src="/uploads/{{this.Image.[2]}}" alt="">
+                                    <div>
+                                        <span>+</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-element">
+                                <input type="file" id="file-4" accept="image/*" name="Image">
+                                <label for="file-4" id="file-4-preview">
+                                    <img src="/uploads/{{this.Image.[3]}}" alt="">
+                                    <div>
+                                        <span>+</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    {{/each}}
+                    <button type="submit" class="btn btn-success mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .error {
+        color: red;
+    }
+
+
+    .form_img {
+        margin: 33px 0px 20px;
+        padding: 0px 50px;
+    }
+
+    .form_img h2 {
+        text-align: center;
+        color: #acacac;
+        font-size: 40px;
+        font-weight: 400;
+    }
+
+    .form_img .grid {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 10px;
+        overflow: hidden;
+    }
+
+    .form_img .grid .form-element {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        box-shadow: 0px 0px 20px 5px rgba(100, 100, 100, 0.1);
+    }
+
+    .form_img .grid .form-element input {
+        display: none;
+    }
+
+    .form_img .grid .form-element img {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        object-fit: cover;
+    }
+
+    .form_img .grid .form-element div {
+        position: relative;
+        height: 40px;
+        margin-top: -40px;
+        background: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        line-height: 40px;
+        font-size: 13px;
+        color: #f5f5f5;
+        font-weight: 600;
+    }
+
+    .form_img .grid .form-element div span {
+        font-size: 40px;
+    }
+</style>
+
+<script>
+    function previewBeforeUpload(id) {
+        document.querySelector("#" + id).addEventListener("change", function (e) {
+            if (e.target.files.length == 0) {
+                return;
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("#" + id + "-preview div").innerText = file.name;
+            document.querySelector("#" + id + "-preview img").src = url;
+        });
+    }
+
+    previewBeforeUpload("file-1");
+    previewBeforeUpload("file-2");
+    previewBeforeUpload("file-3");
+    previewBeforeUpload("file-4");
+</script>
+
+
+<script>
+    $("#edit-package").validate();
+</script>

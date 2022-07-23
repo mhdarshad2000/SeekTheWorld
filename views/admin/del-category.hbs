@@ -1,0 +1,49 @@
+<div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+
+            <div class="col-lg-8 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  
+                  <div class="table-responsive">
+                    <table class="table table-hover" >
+                      <th scope="col">index</th>
+                      <th scope="col">category</th>
+                      <th scope="col"></th>
+
+                      </tr>
+                      </thead>
+                      <tbody>
+                        {{#each response}}
+
+
+                        <tr>
+                          <td>{{inc @index}}</td>
+                          <td>{{this.categoryName}}</td>
+                          <td class="d-flex d-flex justify-content-end">
+
+
+                            <a href="/admin/restore-category/{{this._id}}" class="btn btn-primary"
+                              onclick="return confirm('Are you sure to Restore {{this.categoryName}}')">Restore</a>
+
+
+                           
+                          </td>
+                        </tr>
+
+                        {{/each}}
+
+                      </tbody>
+
+                    </table>
+
+                    <!-- content-wrapper ends -->
+
+                  </div>
+                  <!-- main-panel ends -->
+                </div>
+                <!-- page-body-wrapper ends -->
+              </div>
+              <!-- container-scroller -->
+              <!-- plugins:js -->

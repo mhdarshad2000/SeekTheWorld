@@ -1,0 +1,200 @@
+{{#each viewBooking}}
+    <div class="invoice-box mt-4">
+        <table cellpadding="0"cellspacing="0">
+		<tr class="top_rw">
+		   <td colspan="2">
+		      <h2 style="margin-bottom: 0px;"> Booking invoice</h2>
+              {{#if booking.refundID}}
+
+              {{else}}
+			  <span style=""> Number: {{this.booking._id}} Date: {{this.booking.bookingDate}} </span>
+    {{/if}}
+           </td>
+		    <td  style="width:30%; margin-right: 10px;">
+		        Payment Order Id: {{this.booking._id}}
+		   </td>
+		</tr>
+            <tr class="top">
+                <td colspan="3">
+                    <table>
+                        <tr>
+                            <td>
+							<b> Made By: Seek The World </b> <br>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                  <td colspan="3">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+							<b> Customer Address: {{this.address.house}} </b> <br>
+                                {{this.address.place}}, {{this.address.city}} <br>
+                                {{this.phone}}<br>
+                                {{this.email}}<br>
+								
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+                            <td colspan="3">
+                                <div class="container d-flex justify-content-center">
+            <table cellspacing="0px" class="w-50" cellpadding="2px">
+            <tr class="heading">
+                <td>
+                    Name
+                </td>
+
+				 
+				 <td style="text-align:right;">
+                   TOTAL 
+                </td>
+            </tr>
+			<tr class="item">
+               <td >
+                    Adults
+                </td>
+				<td id="adultCount" style="text-align:right;">
+                    {{this.booking.adultsCount}}
+                </td>
+
+            </tr>
+            <tr class="item">
+               <td >
+                    Childs
+                </td>
+				<td id="childCount" style="text-align:right;">
+                    {{this.booking.childsCount}}
+                </td>
+
+            </tr>
+			<tr class="item">
+               <td  <b> Total Amount</b> </td>
+
+				 <td style="text-align:right;">
+                    {{this.booking.totalPrice}}
+                </td>
+            </tr>
+            </td>
+			</table>
+            </div>
+			<tr>
+			   <td colspan="3">
+			     <table cellspacing="0px" cellpadding="2px">
+				    <tr>
+			            <td width="50%">
+						<b> Declaration: </b> <br>
+The Total amount may vary in applying coupon and a 18% tax is added in the subtotal Amount
+						</td>
+						<td>
+						 * This is a computer generated invoice and does not
+						  require a physical signature
+						</td>
+			        </tr>
+					 <tr>
+			            <td width="50%">
+						</td>
+						<td>
+						 	<b> Authorized Signature </b>
+							<br>
+							<br>
+							sd/-
+							<br>
+							<br>
+							<br>
+						</td>
+			        </tr>
+			     </table>
+			   </td>
+			</tr>
+        </table>
+    </div>
+{{/each}}
+
+
+<style>
+    .top_rw{ background-color:#f4f4f4; }
+	.td_w{ }
+	button{ padding:5px 10px; font-size:14px;}
+    .invoice-box {
+        max-width: 890px;
+        margin: auto;
+        padding:10px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 14px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+		border-bottom: solid 1px #ccc;
+    }
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align:middle;
+    }
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+		font-size:12px;
+    }
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+    .invoice-box table tr.item td{
+        border-bottom: 1px solid #eee;
+    }
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+    /** RTL **/
+    .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+    .rtl table {
+        text-align: right;
+    }
+    .rtl table tr td:nth-child(2) {
+        text-align: left;
+    }
+</style>

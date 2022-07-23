@@ -1,0 +1,192 @@
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown">
+            {{!-- <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-bell mx-0"></i>
+              <span class="count"></span>
+            </a> --}}
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                Refund Requsests
+              <i class="icon-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+                
+              
+            </div>
+          </li>
+
+<ul class="navbar-nav navbar-nav-right"></ul>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/faces/face28.jpg" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              
+              <a class="dropdown-item" href="/admin/logout">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+          </ul>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+      <div id="right-sidebar" class="settings-panel">
+       
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+            </div>
+            <div class="list-wrapper px-3">
+             
+              </ul>
+            </div>
+            
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                
+              </div>
+              
+            </div>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                
+              </div>
+              
+            </div>
+          </div>
+         
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas " id="sidebar">
+        <ul class="nav position-fixed ">
+          <li class="nav-item ">
+            <a class="nav-link" href="/admin/dashboard">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Category</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu" type="none">
+                <li class="nav-item"> <a class="nav-link" href="/admin/category/add">Add Categories</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/category">Categories</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/deleted-categories">Recently Deleted</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/users">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Users</span>
+            </a>  
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Packages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu" type="none">
+                <li class="nav-item"> <a class="nav-link" href="/admin/package">Packages</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/add-package">Add Packages</a></li>
+              </ul>
+            </div>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#bookings" aria-expanded="false" aria-controls="bookings">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Bookings</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="bookings">
+              <ul class="nav flex-column sub-menu" type="none">
+                <li class="nav-item"> <a class="nav-link" href="/admin/bookings">Bookings</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/bookings/active">Active Bookings</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/bookings/cancels">Cancels</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/bookings/completed">Completed</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#coupons" aria-expanded="false" aria-controls="coupons">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Coupons</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="coupons">
+              <ul class="nav flex-column sub-menu" type="none">
+                <li class="nav-item"> <a class="nav-link" href="/admin/coupons">Coupons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/coupons/add">Add Coupons</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/banner">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Banner</span>
+            </a>  
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      
+  <!-- container-scroller -->
+
+  
+
+
+

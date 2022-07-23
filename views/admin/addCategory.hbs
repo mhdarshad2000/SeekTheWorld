@@ -1,0 +1,79 @@
+<!-- validate jquery-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-8 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <form class="form-group" id="category_form">
+              <div class="form-group content-wrappers text-center mt-2">
+                <h3 class="d-flex justify-content-start mb-4">Categories</h3>
+                <input required type="text" placeholder="Enter a category"
+                  class="form-control mt-2 text-2 text-uppercase" id="cat" name="cat" required minlength="4"
+                  maxlength="20">
+                <button type="submit" class="btn btn-primary mt-4 ">Add category</button>
+              </div>
+            </form>
+            <!-- main-panel ends -->
+          </div>
+          <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $("#category_form").validate({
+    submitHandler: function (form) {
+      $.ajax({
+        url: '/admin/category_add',
+        method: 'post',
+        data: $(form).serialize(),
+        success: (response) => {
+          if (response.inserted) {
+
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Inserted Succesfully'
+            })
+            location.reload()
+          } else if (response.exist) {
+            Toast.fire({
+              icon: 'error',
+              title: 'Category Already Exist or Deleted'
+            })
+            location.reload()
+          }
+
+        }
+      })
+    }
+  })
+
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+</script>
+<style>
+  .error {
+    color: red;
+  }
+</style>

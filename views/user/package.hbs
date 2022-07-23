@@ -1,0 +1,242 @@
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Packages</h4>
+                    <div class="breadcrumb__links">
+                        <a href="/">Home</a>
+                        <span>Packages</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shop Section Begin -->
+<section class="shop spad">
+    <div class="container-fluid px-5 ">
+        <div class="row">
+            <div class="col-lg-3 pl-5 ">
+                <div class="shop__sidebar">
+                    <div class="shop__sidebar__search">
+                        <form action="/package/search" method="post">
+                            <input type="text" name="searchKey" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="shop__sidebar__accordion">
+                        <div class="accordion" id="accordionExample">
+                            <form id="filter">
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                                                    <li><input type="checkbox" name="category" id="" value="" checked
+                                                            hidden></li>
+                                                    {{#each category}}
+                                                    <li>
+                                                        <input type="checkbox" name="category"
+                                                            value="{{this.categoryName}}">
+                                                        <label>{{this.categoryName}}</label>
+                                                    </li>
+                                                    {{/each}}
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#price">Price Range</a>
+                                    </div>
+                                    <div id="price" class="collapse show" data-parent="">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                                                    <li>
+                                                        <input type="radio" value="20000" name="price">
+                                                        <label>Bellow 20000</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" value="40000" name="price">
+                                                        <label>Bellow 40000</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" value="60000" name="price">
+                                                        <label>Bellow 60000</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" value="80000" name="price">
+                                                        <label>Bellow 80000</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" value="100000" name="price">
+                                                        <label>Bellow 100000</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" value="150000" name="price">
+                                                        <label>Bellow 150000</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="price" value="1000000" checked hidden>
+                                                    </li>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                                                    <li>
+                                                        <input type="radio" value="high" name="priceSort">
+                                                        <label>High To Low</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" value="low" name="priceSort">
+                                                        <label>Low to High</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" value="sort" name="priceSort" checked hidden>
+
+                                                    </li>
+                                                    
+                                            </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9" >
+                <div id="rlFilter" class="row">
+                    {{#each filteredPackages}}
+                    <div class="col-md-4 mb-4">
+                        <div class="card overflow-hidden shadow"> <img class="card-img-top"
+                                src="/uploads/{{this.Image.[0]}}" alt="" style="height: 25rem;" />
+                            <div class="card-body py-4 px-3">
+                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                    <h4 class="text-secondary fw-medium"><a
+                                            class=" text-decoration-none"
+                                            href="/fetchpackage/{{this._id}}">{{this.name}}</a></h4><span
+                                        class="fs-1 fw-medium">₹ {{this.price.adult}}</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between"> 
+                                    <span class="fs-0 fw-medium">{{this.days}} Days
+                                        Trip</span>
+                                    <span>
+                                        <button  class="btn btn-primary" style="float: right;"
+                                            onclick="addToWishlist('{{this._id}}')">Add to Wishlists</button>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section End -->
+
+<script>
+
+    function addToWishlist(productId) {
+        $.ajax({
+            url: '/addToWishlist/' + productId,
+            method: 'get',
+            success: (response) => {
+                console.log(response)
+                if (response.status) {
+                    $('#rlFilter').load(location.href + " #rlFilter")
+
+                } else {
+                    location.href = '/login'
+                }
+            }
+        })
+    }
+    function removeFromWishlist(productId) {
+        $.ajax({
+            url: '/removeFromWishlist/' + productId,
+            method: 'get',
+            success: (response) => {
+                if (response) {
+                    $('#rlFilter').load(location.href + " #rlFilter")
+                } else {
+                    location.href = '/login'
+                }
+            }
+        })
+    }
+
+
+    $('input[name=category]').change(function () {
+        $.ajax({
+            url: '/filter',
+            method: 'post',
+            data: $('#filter').serialize(),
+            success: (response) => {
+                if (response.status) {
+                    $('#rlFilter').load(location.href + " #rlFilter")
+
+                } else {
+                    swal.fire({
+                        title: 'Oooops!',
+                        text: 'Something went wrong',
+                        icon: 'error',
+                        confirmButtonText: 'Ok',
+                        timer: 6000
+                    })
+                    location.reload()
+                }
+            }
+        })
+    })
+    $('input[name=price]').change(function () {
+        $.ajax({
+            url: '/filter',
+            method: 'post',
+            data: $('#filter').serialize(),
+            success: (response) => {
+                if (response.status) {
+                    $('#rlFilter').load(location.href + " #rlFilter")
+
+                } else {
+                    swal.fire({
+                        title: 'Oooops!',
+                        text: 'Something went wrong',
+                        icon: 'error',
+                        confirmButtonText: 'Ok',
+                        timer: 6000
+                    })
+                    location.reload()
+                }
+            }
+        })
+    })
+    $('input[name=priceSort]').change(function () {
+        $.ajax({
+            url: '/filter',
+            method: 'post',
+            data: $('#filter').serialize(),
+            success: (response) => {
+                if (response.status) {
+                    $('#rlFilter').load(location.href + " #rlFilter")
+                }
+            }
+        })
+    })
+
+</script>

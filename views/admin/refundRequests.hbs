@@ -1,0 +1,61 @@
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="h2 mb-3">Refund</h2>
+            <div class="table-responsive">
+              <table class="table" id="">
+                <tr>
+
+                  <th scope="col">Number</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Price</th>
+                  <th scope="col"></th>
+                  <thead>
+
+                  </thead>
+                  <tbody>
+                    {{#each refundRequests}}
+                        <tr>
+                          <td>{{inc @index}}</td>
+                          <td>{{this.name}}</td>
+                          <td>{{this.phone}}</td>
+                          <td>{{this.email}}</td>
+                        <td>{{this.booking.totalPrice}}</td>
+                          <td>
+                            <button onclick="approveRefund('{{this.booking._id}}','{{this.booking.totalPrice}}')" class="btn btn-danger">approveRefund</button>
+                        </tr>
+                        {{/each}}
+
+
+
+
+                  </tbody>
+
+              </table>
+
+              <!-- content-wrapper ends -->
+
+            </div>
+            <!-- main-panel ends -->
+          </div>
+          <!-- page-body-wrapper ends -->
+        </div>
+<script>
+    function approveRefund(orderId,totalPrice){
+        $.ajax({
+        url:'/admin/refund/approve',
+        data:{orderId,totalPrice},
+        method:'post',
+        success:(response)=>{
+            if(response.status)
+          {alert('jfsdbjbfsdn')}
+        }
+      })
+  }
+</script>

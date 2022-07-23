@@ -1,0 +1,69 @@
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            {{!-- <a href="/admin/add-package" class="btn btn-success mb-5 ml-auto">Add Packages</a> --}}
+            <h2 class="h2 mb-3">Packages</h2>
+            <div class="table-responsive">
+              <table class="table table-hover" id="category_table">
+                <tr>
+
+                  <th scope="col">Number</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Price Adult</th>
+                  <th scope="col">Price Child</th>
+                  <th scope="col">Image</th>
+                  <th scope="col"></th>
+                  <thead>
+
+                  </thead>
+                  <tbody>
+                    {{#each response}}
+
+                    <tr>
+                      <td>{{inc @index}}</td>
+                      <td>{{this.name}}</td>
+                      <td>{{this.category.categoryName}}</td>
+                      <td>{{this.price.adult}}</td>
+                      <td>{{this.price.child}}</td>
+                      <td><img src="/uploads/{{this.Image.[0]}}" alt="" style=""></td>
+                      <td><a href="/admin/edit-package/{{this._id}}" class="btn btn-primary">Edit</a>
+                      <a href="/admin/delete-package/{{this._id}}" class="btn btn-danger ms-5">Delete</a></td>
+
+                    {{/each}}
+
+
+
+                  </tbody>
+
+              </table>
+
+              <!-- content-wrapper ends -->
+
+            </div>
+            <!-- main-panel ends -->
+          </div>
+          <!-- page-body-wrapper ends -->
+        </div>
+
+
+
+
+        <script>
+
+          $(document).ready(function () {
+
+
+            $('#user_table').wrap('<div id="hide" style="display:none"/>');
+
+            $('#hide').css('display', 'block');
+          });
+
+
+          var table = $('#user_table').DataTable();
+
+        </script>
