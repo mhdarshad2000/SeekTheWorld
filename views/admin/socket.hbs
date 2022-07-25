@@ -1,0 +1,12 @@
+<h1>
+    admin
+</h1>
+
+<p id="notieText"></p>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io()
+    socket.on("boardContent",(msg){
+        document.getElementById('notieText').innerHTML = msg
+    })
+</script>

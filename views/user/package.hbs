@@ -1,6 +1,6 @@
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-option">
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__text">
@@ -96,45 +96,44 @@
                                 </div>
                                 <div>
                                     <div class="shop__sidebar__categories">
-                                                <ul class="nice-scroll">
-                                                    <li>
-                                                        <input type="radio" value="high" name="priceSort">
-                                                        <label>High To Low</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" value="low" name="priceSort">
-                                                        <label>Low to High</label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" value="sort" name="priceSort" checked hidden>
+                                        <ul class="nice-scroll">
+                                            <li>
+                                                <input type="radio" value="high" name="priceSort">
+                                                <label>High To Low</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="low" name="priceSort">
+                                                <label>Low to High</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="sort" name="priceSort" checked hidden>
 
-                                                    </li>
-                                                    
-                                            </div>
+                                            </li>
+
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9" >
+            <div class="col-lg-9">
                 <div id="rlFilter" class="row">
                     {{#each filteredPackages}}
-                    <div class="col-md-4 mb-4">
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
                         <div class="card overflow-hidden shadow"> <img class="card-img-top"
                                 src="/uploads/{{this.Image.[0]}}" alt="" style="height: 25rem;" />
                             <div class="card-body py-4 px-3">
                                 <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                    <h4 class="text-secondary fw-medium"><a
-                                            class=" text-decoration-none"
+                                    <h4 class="text-secondary fw-medium"><a class=" text-decoration-none"
                                             href="/fetchpackage/{{this._id}}">{{this.name}}</a></h4><span
                                         class="fs-1 fw-medium">₹ {{this.price.adult}}</span>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between"> 
+                                <div class="d-flex align-items-center justify-content-between">
                                     <span class="fs-0 fw-medium">{{this.days}} Days
                                         Trip</span>
                                     <span>
-                                        <button  class="btn btn-primary" style="float: right;"
+                                        <button class="btn btn-primary" style="float: right;"
                                             onclick="addToWishlist('{{this._id}}')">Add to Wishlists</button>
                                         </button>
                                     </span>
@@ -150,93 +149,68 @@
 </section>
 <!-- Shop Section End -->
 
+
+<script src="/userElem/js/main.js"></script>
+
 <script>
 
-    function addToWishlist(productId) {
-        $.ajax({
-            url: '/addToWishlist/' + productId,
-            method: 'get',
-            success: (response) => {
-                console.log(response)
-                if (response.status) {
-                    $('#rlFilter').load(location.href + " #rlFilter")
+$('input[name=category]').change(function () {
+  $.ajax({
+      url: '/filter',
+      method: 'post',
+      data: $('#filter').serialize(),
+      success: (response) => {
+          if (response.status) {
+              $('#rlFilter').load(location.href + " #rlFilter")
 
-                } else {
-                    location.href = '/login'
-                }
-            }
-        })
-    }
-    function removeFromWishlist(productId) {
-        $.ajax({
-            url: '/removeFromWishlist/' + productId,
-            method: 'get',
-            success: (response) => {
-                if (response) {
-                    $('#rlFilter').load(location.href + " #rlFilter")
-                } else {
-                    location.href = '/login'
-                }
-            }
-        })
-    }
+          } else {
+              swal.fire({
+                  title: 'Oooops!',
+                  text: 'Something went wrong',
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                  timer: 6000
+              })
+              location.reload()
+          }
+      }
+  })
+})
 
 
-    $('input[name=category]').change(function () {
-        $.ajax({
-            url: '/filter',
-            method: 'post',
-            data: $('#filter').serialize(),
-            success: (response) => {
-                if (response.status) {
-                    $('#rlFilter').load(location.href + " #rlFilter")
+$('input[name=price]').change(function () {
+  $.ajax({
+      url: '/filter',
+      method: 'post',
+      data: $('#filter').serialize(),
+      success: (response) => {
+          if (response.status) {
+              $('#rlFilter').load(location.href + " #rlFilter")
 
-                } else {
-                    swal.fire({
-                        title: 'Oooops!',
-                        text: 'Something went wrong',
-                        icon: 'error',
-                        confirmButtonText: 'Ok',
-                        timer: 6000
-                    })
-                    location.reload()
-                }
-            }
-        })
-    })
-    $('input[name=price]').change(function () {
-        $.ajax({
-            url: '/filter',
-            method: 'post',
-            data: $('#filter').serialize(),
-            success: (response) => {
-                if (response.status) {
-                    $('#rlFilter').load(location.href + " #rlFilter")
+          } else {
+              swal.fire({
+                  title: 'Oooops!',
+                  text: 'Something went wrong',
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                  timer: 6000
+              })
+              location.reload()
+          }
+      }
+  })
+})
 
-                } else {
-                    swal.fire({
-                        title: 'Oooops!',
-                        text: 'Something went wrong',
-                        icon: 'error',
-                        confirmButtonText: 'Ok',
-                        timer: 6000
-                    })
-                    location.reload()
-                }
-            }
-        })
-    })
-    $('input[name=priceSort]').change(function () {
-        $.ajax({
-            url: '/filter',
-            method: 'post',
-            data: $('#filter').serialize(),
-            success: (response) => {
-                if (response.status) {
-                    $('#rlFilter').load(location.href + " #rlFilter")
-                }
-            }
-        })
-    })
-
+$('input[name=priceSort]').change(function () {
+  $.ajax({
+      url: '/filter',
+      method: 'post',
+      data: $('#filter').serialize(),
+      success: (response) => {
+          if (response.status) {
+              $('#rlFilter').load(location.href + " #rlFilter")
+          }
+      }
+  })
+})
 </script>

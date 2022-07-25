@@ -27,12 +27,12 @@ const $form = $('#book')
         verifyPayment(response, order)
       },
       "prefill": {
-        "name": document.getElementById(user).value,
-        "email": document.getElementById(email).value,
-        "contact": document.getElementById(phone).value
+        "name": "Gourav Kumar",
+        "email": "Gourav@gmail.com",
+        "contact": "123"
       },
       "notes": {
-        "address": document.getElementById(address).value
+        "address": "Trichy"
       },
       "theme": {
         "color": "#3399cc"

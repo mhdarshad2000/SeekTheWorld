@@ -33,6 +33,27 @@ module.exports = {
         }
         })
     },
+    adminCouponView : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            try{
+                const coupons = await Coupon.aggregate([{$match:{isDeleted:false}},
+                {$project:{
+                created: { $dateToString: { format: "%Y-%m-%d", date: '$createdDate' } },
+                expiry: {$dateToString: {format: "%Y-%m-%d", date: '$expiryDate'}},
+                image:1,
+                offer:1,
+                _id:1,
+                limit:1,
+                couponName:1,
+                couponCode:1
+            }}])
+            resolve(coupons)
+            }catch(error)
+            {
+                reject(error)
+            }
+        })
+    },
     getCoupon : ()=>{
         return new Promise(async(resolve,reject)=>{
             try{

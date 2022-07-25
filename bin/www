@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const socket = require('socket.io');
+
 /**
  * Module dependencies.
  */
@@ -20,6 +22,27 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+
+
+const io = socket(server);
+
+// run when clind connecte
+
+io.on('connection', (socket) => {
+  console.log('New WS connection.....');
+
+  socket.on("disconnect",()=>{
+    console.log("closed");
+  })
+
+  socket.on("message",(msg)=>{
+io.emit('board',msg)
+  })
+
+  })
+  // listen to chat message
+
 
 /**
  * Listen on provided port, on all network interfaces.

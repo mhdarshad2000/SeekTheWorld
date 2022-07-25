@@ -1,187 +1,230 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <div class="col-md-9 grid-margin transparent mt-5">
-    <div class="row">
-        <div class="col-md-4 mb-4 stretch-card transparent">
-            <div class="card card-dark-blue">
-                <a style="text-decoration:none ; color:white;"  href="/admin/users">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                    <p class="mb-4">Total Users</p>
-                    <i class="bi bi-people h1" ></i>
-                    </div>
-                    <p class="fs-30 mb-2">Active Users - {{countUsers.countUnBlockedUsers}}</p>
-                    <p>Blocked Users - {{countUsers.countBlockedUsers}}</p>
-                </div>
-                </a>
+  <div class="row">
+    <div class="col-md-4 mb-4 stretch-card transparent">
+      <div class="card card-dark-blue">
+        <a style="text-decoration:none ; color:white;" href="/admin/users">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <p class="mb-4">Total Users</p>
+              <i class="bi bi-people h1"></i>
             </div>
-        </div>
-        <div class="col-md-4 mb-4 stretch-card transparent">
-            <div class="card card-dark-blue">
-                <div class="card-body">
-                    <a style="text-decoration:none ; color:white;"  href="/admin/bookings">
-                    <div class="d-flex justify-content-between">
-                    <p class="mb-4">Total Bookings</p>
-                    <i class="bi bi-calendar2-check h1"></i>
-                    </div>
-                    
-                    <p class="fs-30 mb-2">Total Revenue - {{totalRevenue.[0].total}}</p>
-                    <p>Bookings - {{bookings.totalBookingLength}}</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4 stretch-card transparent">
-            <div class="card card-dark-blue">
-                <div class="card-body">
-                    <a style="text-decoration:none ; color:white;"  href="/admin/package">
-                    <div class="d-flex justify-content-between">
-                    <p class="mb-4">Total Packages</p>
-                    <i class="bi bi-collection h1"></i>
-                    </div>
-                    <p class="fs-30 mb-2">Active Packages - {{packages}}</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4 stretch-card transparent">
-            <div class="card card-dark-blue">
-                <div class="card-body">
-                    <a style="text-decoration:none ; color:white;"  href="#">
-                    <div class="d-flex justify-content-between">
-                    <p class="mb-4">Today's Report</p>
-                    <i class="bi bi-cash-stack h1"></i>
-                    </div>
-                    <p class="fs-30 mb-2">Today's Revenue - {{todaySale.[0].total}}</p>
-                    <p>Today's Bookings - {{todaySale.[0].count}}</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4 stretch-card transparent">
-            <div class="card card-dark-blue">
-                <div class="card-body">
-                    <a style="text-decoration:none ; color:white;"  href="#">
-                    <div class="d-flex justify-content-between">
-                    <p class="mb-4">Cancels</p>
-                    <i class="bi bi-cash-stack h1"></i>
-                    </div>
-                    <p class="fs-30 mb-2">Total Cancel - {{totalCancels.[0].count}}</p>
-                    <p>Today's Cancel - {{todayCancels.[0].count}}</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4 stretch-card transparent">
-            <div class="card card-dark-blue">
-                <div class="card-body">
-                    <a style="text-decoration:none ; color:white;"  href="#">
-                    <div class="d-flex justify-content-between">
-                    <p class="mb-4">Refund</p>
-                    <i class="bi bi-cash-stack h1"></i>
-                    </div>
-                    <p class="fs-30 mb-2">Total Refund - {{totalCancels.[0].total}}</p>
-                    <p>Today's Refund - {{todayCancels.[0].totl}}</p>
-                    </a>
-                </div>
-            </div>
-        </div>
+            <p class="fs-30 mb-2">Active Users - {{countUsers.countUnBlockedUsers}}</p>
+            <p>Blocked Users - {{countUsers.countBlockedUsers}}</p>
+          </div>
+        </a>
+      </div>
     </div>
-    <div class="row mt-5">
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-        <canvas id="myCharting" style="width:100%;max-width:700px"></canvas>
-        <table class="table table-dark" id="category_table">
-                <tr>
+    <div class="col-md-4 mb-4 stretch-card transparent">
+      <div class="card card-dark-blue">
+        <div class="card-body">
+          <a style="text-decoration:none ; color:white;" href="/admin/bookings">
+            <div class="d-flex justify-content-between">
+              <p class="mb-4">Total Bookings</p>
+              <i class="bi bi-calendar2-check h1"></i>
+            </div>
 
-                  <th scope="col">Number</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Price Adult</th>
-                  <th scope="col">Price Child</th>
-                  <th scope="col">Image</th>
-                  <th scope="col"></th>
-                  <thead>
-
-                  </thead>
-                  <tbody>
-                    {{#each dailyRevenue}}
-
-                    <tr>
-                      <td>{{inc @index}}</td>
-                      <td>{{this._id}}</td>
-                      <td>{{this.total}}</td>
-                      <td>{{this.price.adult}}</td>
-                      <td>{{this.price.child}}</td>
-                      
-                    {{/each}}
-
-
-
-                  </tbody>
-
-              </table>
+            <p class="fs-30 mb-2">Total Revenue - {{totalRevenue.[0].total}}</p>
+            <p>Bookings - {{bookings.totalBookingLength}}</p>
+          </a>
+        </div>
+      </div>
     </div>
+    <div class="col-md-4 mb-4 stretch-card transparent">
+      <div class="card card-dark-blue">
+        <div class="card-body">
+          <a style="text-decoration:none ; color:white;" href="/admin/package">
+            <div class="d-flex justify-content-between">
+              <p class="mb-4">Total Packages</p>
+              <i class="bi bi-collection h1"></i>
+            </div>
+            <p class="fs-30 mb-2">Active Packages - {{packages}}</p>
+          </a>
+        </div>
+      </div>
     </div>
-
-<script>
-var xValues = ["Revenue", "Refund"];
-var yValues = [{{#each paymentPie}}{{this}},{{/each}}];
-var barColors = [
-  "#27b327",
-  "#ffa500",
-  
-];
-
-new Chart("myChart", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "Revenue Refund Ratio"
-    }
-  }
-});
-</script>
-   
-   
-
-<script>
-
-
-var xValues = ["Honey Moon","Vacation"];
-
-
-var yValues = [{{#each chartCategoryTotal}}{{this}},{{/each}}];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
-
-new Chart("myCharting", {
-  type: "doughnut",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "World Wide Wine Production 2018"
-    }
-  }
-});
-</script>
+    <div class="col-md-4 mb-4 stretch-card transparent">
+      <div class="card card-dark-blue">
+        <div class="card-body">
+          <a style="text-decoration:none ; color:white;" href="#">
+            <div class="d-flex justify-content-between">
+              <p class="mb-4">Today's Report</p>
+              <i class="bi bi-cash-stack h1"></i>
+            </div>
+            <p class="fs-30 mb-2">Today's Revenue - {{todaySale.[0].total}}</p>
+            <p>Today's Bookings - {{todaySale.[0].count}}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4 stretch-card transparent">
+      <div class="card card-dark-blue">
+        <div class="card-body">
+          <a style="text-decoration:none ; color:white;" href="#">
+            <div class="d-flex justify-content-between">
+              <p class="mb-4">Cancels</p>
+              <i class="bi bi-cash-stack h1"></i>
+            </div>
+            <p class="fs-30 mb-2">Total Cancel - {{totalCancels.[0].count}}</p>
+            <p>Today's Cancel - {{todayCancels.[0].count}}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4 stretch-card transparent">
+      <div class="card card-dark-blue">
+        <div class="card-body">
+          <a style="text-decoration:none ; color:white;" href="#">
+            <div class="d-flex justify-content-between">
+              <p class="mb-4">Refund</p>
+              <i class="bi bi-cash-stack h1"></i>
+            </div>
+            <p class="fs-30 mb-2">Total Refund - {{totalCancels.[0].total}}</p>
+            <p>Today's Refund - {{todayCancels.[0].total}}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h4 class="card-title">Doughnut chart</h4>
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h4 class="card-title">category Wise Sales</h4>
+          <canvas id="category"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Daily Revenue</h4>
+                  <div class="table-responsive pt-3">
+                    <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Day</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each dailyRevenue}}
+                        <tr>
+                          <td>{{inc @index}}</td>
+                          <td>{{this._id}}</td>
+                          <td>{{this.total}}</td>
+                        </tr>
+                        {{/each}}
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Daily Refund</h4>
+                  <div class="table-responsive pt-3">
+                    <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Day</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each dailyRefund}}
+                        <tr>
+                          <td>{{inc @index}}</td>
+                          <td>{{this._id}}</td>
+                          <td>{{this.total}}</td>
+                        </tr>
+                        {{/each}}
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+  </div>
 </div>
-</div>
+
+
+    <script>
+      var xValues = ["payment", "Refund"];
+      var yValues = [{{ paymentPie }}];
+      var barColors = [
+        "#ffd980",
+        "#ff6181",
+
+      ];
+
+      new Chart("myChart", {
+        type: "doughnut",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Revenue Refund Ratio"
+          }
+        }
+      });
+    </script>
+
+    <script>
+      var xValues = [{{#each categoryWise}}"{{this._id}}",{{/each}}];
+      var yValues = [{{#each categoryWise}}{{this.total}},{{/each}}];
+      var barColors = [
+        "#ff006e",
+        "#2ec4b6",
+        "#ff7d00",
+        "#00a8e8",
+        "#62b6cb",
+        "#758bfd",
+        "#ff9505",
+        "#aaf683",
+        "#004e98",
+        "#ff8fab",
+        "#15616d",
+
+
+      ];
+
+      new Chart("category", {
+        type: "pie",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: "World Wide Wine Production 2018"
+          }
+        }
+      });
+    </script>

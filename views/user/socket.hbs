@@ -1,0 +1,15 @@
+<h1>nsclknklnds
+</h1>
+    <textarea name="lkl" id="send" cols="30" rows="10"></textarea>
+    <button id="send">akdaklkl</button>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    document.getElementById("send").addEventListener("click",function(){
+        let text = document.getElementById("lkl").value
+        socket.emit("message",text)
+    })
+</script>

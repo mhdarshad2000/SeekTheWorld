@@ -49,35 +49,34 @@ router.get('/logout',(req,res)=>{
 // add product
 router.get('/dashboard',verifyAdminLogin,async(req,res,next)=>{
   try{
-    let result = await Promise.all([
-     dashboardHelpers.countUsers(),
-     dashboardHelpers.countBookings(),
-     dashboardHelpers.packages(),
-     dashboardHelpers.totalRevenue(),
-     dashboardHelpers.todaySale(),
-     dashboardHelpers.totalCancels(),
-     dashboardHelpers.todayCancels(),
-     dashboardHelpers.paymentPie(),
-     dashboardHelpers.categoryPrice(),
-     dashboardHelpers.dailyRevenue(),
-  ])
-  const chartCategoryName = result[8].map(x=>(x._id))
-  const chartCategoryTotal = result[8].map(x=>(x.total))
-  const totalBookingLength = result[1].length
-    const bookings = {result: result[1],totalBookingLength}
+     const countUsers = await dashboardHelpers.countUsers()
+     const bookingCount = await dashboardHelpers.countBookings()
+     const packages = await dashboardHelpers.packages()
+     const totalRevenue = await dashboardHelpers.totalRevenue()
+     const todaySale = await dashboardHelpers.todaySale()
+     const totalCancels = await dashboardHelpers.totalCancels()
+     const todayCancels = await dashboardHelpers.todayCancels()
+     const paymentPie = await dashboardHelpers.paymentPie()
+     const categoryWise = await dashboardHelpers.categoryPrice()
+     const dailyRevenue = await dashboardHelpers.dailyRevenue()
+     const dailyRefund = await dashboardHelpers.dailyRefund()
+     console.log(dailyRevenue)
+console.log(categoryWise)
+  const totalBookingLength = bookingCount.length
+    const bookings = {bookingCount,totalBookingLength}
      res.render('admin/admin-dashboard',{layout:"layout",
      admin:true,
-     countUsers:result[0],
+     countUsers,
      bookings,
-     packages:result[2],
-     totalRevenue:result[3],
-     todaySale:result[4],
-     totalCancels : result[5],
-     todayCancels : result[6],
-     paymentPie : result[7],
-     chartCategoryName,
-     chartCategoryTotal,
-     dailyRevenue:result[9]
+     packages,
+     totalRevenue,
+     todaySale,
+     totalCancels,
+     todayCancels,
+     paymentPie,
+     categoryWise,
+     dailyRevenue,
+     dailyRefund
     }) 
   }catch(error){
     next(error)
@@ -296,7 +295,7 @@ router.get('/bookings/active',verifyAdminLogin,async(req,res,next)=>{
 })
 router.get('/coupons',verifyAdminLogin,async(req,res,next)=>{
   try{
-      const coupon = await couponHelpers.getCoupon()
+      const coupon = await couponHelpers.adminCouponView()
       res.render('admin/coupon',{admin:true,layout:"layout",coupon})
   }catch(error){
     next(error)
@@ -351,5 +350,7 @@ router.get('/coupon/delete/:id',verifyAdminLogin,async(req,res,next)=>{
   res.json({status:true})
 })
 
-
+router.get('/socket',(req,res)=>{
+  res.render('admin/socket')
+})
 module.exports = router; 

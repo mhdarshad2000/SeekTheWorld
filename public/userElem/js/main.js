@@ -329,3 +329,44 @@ function updateDatas(purpose) {
     readURL(this);
   });
 //Update End
+
+
+//wishlist
+
+function removeFromWishlist(productId){
+  $.ajax({
+    url:'/removeFromWishlist/'+productId,
+    method:'get',
+    success:(response)=>{
+      if(response){
+      location.reload()
+      }else{
+          location.href = '/login'
+      }
+    }
+  })
+}
+
+//wishlist End
+
+//package fiter start
+
+function addToWishlist(productId) {
+  $.ajax({
+      url: '/addToWishlist/' + productId,
+      method: 'get',
+      success: (response) => {
+          console.log(response)
+          if (response.status) {
+              $('#rlFilter').load(location.href + " #rlFilter")
+
+          } else {
+              location.href = '/login'
+          }
+      }
+  })
+}
+
+
+
+//pacakge filter

@@ -13,6 +13,7 @@ module.exports={
             const countUsersResult = {countBlockedUsers,countUnBlockedUsers}
             resolve(countUsersResult)
           }catch(error){
+            console.log(error)
             reject(error)
           }
         })
@@ -38,6 +39,7 @@ module.exports={
             ])
             resolve(countTotalBookings)
         }catch(error){
+          console.log(error)
             reject(error)
         }
         })
@@ -49,6 +51,7 @@ module.exports={
                 const packages = await Package.find({isDeleted:false}).count()
                 resolve(packages)
             } catch (error) {
+              console.log(error)
                 reject(error)
             }
         })
@@ -80,6 +83,7 @@ module.exports={
                   ])
                   resolve(totalRevenueEarned)
             }catch(error){
+              console.log(error)
                 reject(error)
             }
         })
@@ -116,6 +120,7 @@ module.exports={
                   ])
                   resolve(todayRevenue)
             }catch(error){
+              console.log(error)
                 reject(error)
             }
         })
@@ -146,6 +151,7 @@ module.exports={
                   ])
                   resolve(totalCancels)
             }catch(error){
+              console.log(error)
                 reject(error)
             }
         })
@@ -178,6 +184,7 @@ module.exports={
                   ])
                   resolve(todayCancel)
             }catch(error){
+              console.log(error)
             reject(error)
             }
         })
@@ -224,13 +231,14 @@ module.exports={
             }
           ])
           payment.push(values[0].refund)
-          
+          console.log(10)
           resolve(payment)
         }catch(error){
           reject(error)
         }
       })
     },
+  
     categoryPrice : ()=>{
       return new Promise(async(resolve,reject)=>{
         try{
@@ -280,10 +288,11 @@ module.exports={
         }
       })
     },
+  
     dailyRevenue : ()=>{
       return new Promise(async(resolve,reject)=>{
         try{
-          const daily= User.aggregate([
+          const daily=await User.aggregate([
             {
               '$unwind': {
                 'path': '$booking'
@@ -295,6 +304,33 @@ module.exports={
             }, {
               '$group': {
                 '_id': '$booking.bookingDate', 
+                'total': {
+                  '$sum': '$booking.totalPrice'
+                }
+              }
+            }
+          ])
+          resolve(daily)
+        }catch(error){
+          reject(error)
+        }
+      })
+    },
+    dailyRefund : ()=>{
+      return new Promise(async(resolve,reject)=>{
+        try{
+          const daily=await User.aggregate([
+            {
+              '$unwind': {
+                'path': '$booking'
+              }
+            }, {
+              '$match': {
+                'booking.paymentStatus': 'Refunded'
+              }
+            }, {
+              '$group': {
+                '_id': '$booking.cancelledDate', 
                 'total': {
                   '$sum': '$booking.totalPrice'
                 }

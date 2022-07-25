@@ -1,3 +1,20 @@
+  <!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Packages</h4>
+                    <div class="breadcrumb__links">
+                        <a href="/">Home</a>
+                        <span>my Wishlists</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
   <div class="container mt-5 pt-5">
     <div class="mt-5">
 <h3>My Wishlists</h3>
@@ -33,19 +50,4 @@
 
 </div>
 </div>
-<script>
-    function removeFromWishlist(productId){
-        $.ajax({
-          url:'/removeFromWishlist/'+productId,
-          method:'get',
-          success:(response)=>{
-            if(response){
-            location.reload()
-            }else{
-                location.href = '/login'
-            }
-          }
-        })
-  }
-
-</script>
+<script src="/userElem/js/main.js"></script>

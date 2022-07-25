@@ -118,20 +118,19 @@ router.get('/forgetOtp',(req,res)=>{
   }
 })
 
-router.post('/forgetPassword',checkBlocked,async(req,res,next)=>{
+router.post('/forgetPassword',async(req,res,next)=>{
   try{
-    req.session.forgetInfo=req.body
     const user = await userHelpers.forgetPassword(req.body)
   if(user.userNotExist){
     req.session.noUser=true
     res.redirect('/forgetPassword')
   }else{
+    req.session.forgetInfo =  user
     const data= await twilioHelpers.doSms(req.session.forgetInfo)
     if(data){
     req.session.forgetOtp=true
     res.redirect('/forgetOtp')
     }
-    // const userUpdate = await userHelpers.updatePassword(phone,password)
   }
   }catch(error){
     next(error)
@@ -140,18 +139,22 @@ router.post('/forgetPassword',checkBlocked,async(req,res,next)=>{
 router.post('/forgetOtpverify',async(req,res,next)=>{
   try{
     const status = {}
-    const verify = await twilioHelpers.otpVerify(req.body,req.session.forgetInfo)
-    
+    const verify = await twilioHelpers.otpVerify(req.body,req.session.forgetInfo) 
     if(verify.valid){
-      const update= await userHelpers.updatePassword(req.session.forgetInfo)
-      if(update){
-        status.passwordUpdated=true
-        res.redirect('/login')
-      }
+      res.render('user/newPassword')
     }else{
       status.otpError=true
 res.redirect('/forgetOtp')
     }
+  }catch(error){
+    next(error)
+  }
+})
+router.post('/updatePassword',async(req,res,next)=>{
+  try{
+    const email = req.session.forgetInfo.email
+    const update = await userHelpers.updatePassword(email,req.body)
+    res.redirect('/login')
   }catch(error){
     next(error)
   }
@@ -304,7 +307,6 @@ router.post('/filter',checkBlocked,async(req,res,next)=>{
 router.get('/booking',checkBlocked,verifyLogin,async(req,res,next)=>{
   try{
   if(req.session.booking){
-    
     if(req.session.coupon){
       var couponDiscount = req.session.coupon.offer
       var couponName = req.session.coupon
@@ -335,10 +337,6 @@ router.post('/booking',checkBlocked,(req,res)=>{
     res.redirect('/booking')
   }
 })
-router.get('/success',(req,res)=>{
-    res.render('user/success',{layout:"User-layout"})
-
-})
 router.post('/payment',verifyLogin,checkBlocked,async(req,res,next)=>{
   try{
     const user = req.session.userProfile._id
@@ -367,7 +365,7 @@ router.post('/verifyPayment',verifyLogin,checkBlocked,async(req,res,next)=>{
       const order = await bookingHelpers.getBooking(req.session.userProfile._id,req.body['order[receipt]'])
       const book = order[0]
       console.log(book)
-      const text = 'Your Payment of' +' ' +book.totalPrice +' '+ 'Against booking of' +' '+   book.packagename + ' '+
+      const text = 'Congratulations !!!!.."\br" Your Payment of' +' ' +book.totalPrice +' '+ 'for the booking of' +' '+   book.packagename + ' '+
       'has been recieved. And Your travel has been shceduled to the date' + ' ' + book.boarding+ '\n Seek The World'
       const doEmail = await nodemailer.doEmail(mail,subject,text)
       if(req.session.coupon){
@@ -596,5 +594,8 @@ router.get('/booking/view/:id',verifyLogin,checkBlocked,async(req,res,next)=>{
   }catch(error){
     next(error)
   }
+})
+router.get('/socket',async(req,res)=>{
+  res.render('user/socket')
 })
 module.exports = router;

@@ -1,3 +1,8 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
 
 
@@ -5,7 +10,7 @@
 
     <h2 class="mb-5">Add Coupon</h2>
     {{#each couponData}}
-    <form action="/admin/coupon/update/{{this._id}}" method="post" enctype="multipart/form-data">
+    <form action="/admin/coupon/update/{{this._id}}" method="post" enctype="multipart/form-data" id="coupon-update">
 
         <div class="row">
             <div class="col-md-6">
@@ -76,7 +81,14 @@
 </div>
 
 
-
+<script>
+    $("#coupon-update").validate(); 
+</script>
+<style>
+    .error{
+        color:red
+    }
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 

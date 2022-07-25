@@ -1,98 +1,110 @@
+<!-- Page Preloder -->
+{{!-- <div id="preloder">
+    <div class="loader"></div>
+</div> --}}
 
-    <!-- Page Preloder -->
-    {{!-- <div id="preloder">
-        <div class="loader"></div>
-    </div> --}}
+<nav class="navbar navbar-expand-lg text-dark" style="position:fixed; z-index:1000; width:100%; background-color: black; ">
+    <a class="navbar-brand text-light ml-5 pl-2" href="/">Seek The World</a>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" style="fill: white;    height: 26px; width: 26px;"
+            viewBox="0 0 448 512">
+            <path
+                d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
+        </svg>
 
-        <div class="container-fluid px-5">
-            <div class="row">
-                <div class="col-lg-2 col-md-2">
-                    <div class="header__logo">
-                        <a href="/">Seek TheWorld</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><a href="/package">Packages</a></li>
-                            <li><a href="/myBookings">My Bookings</a></li>
-                            <li><a href="/myWishlists">My Wishlists</a></li>
-                            <li><a href="/aboutUs">About Us</a></li>
+    </button>
 
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="header__nav__option">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto text-light">
+            <li class="nav-item active">
+                <a class="nav-link text-light" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="/package">Packages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="/myBookings">Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="/myWishlists">Wishlists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="/aboutUs">About Us</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto ">
+            {{#if login}}
+            <li class="nav-item text-light"><a href="/profile"><svg xmlns="http://www.w3.org/2000/svg" width="40"
+                        height="40" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                    </svg></a></li>
+            {{else}}
+            <li class="nav-item mr-3 login p-2"><a class="btn btn-light border-0 rounded-0" style="width: 5rem;"
+                    href="/login">Login</a></li>
+            <li class="nav-item p-2"><a class="btn btn-light border-0 rounded-0" style="width: 5rem;"
+                    href="/signup">Signup</a></li>
+            {{/if}}
+        </ul>
+    </div>
+</nav>
+</header>
+<!-- Header Section End -->
 
-                        {{#if login}}
-                        <a href="/logout">logout</a>
-                        <a href="/profile"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
-  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-</svg></a>
-                        {{else}}
-                        <a class="btn btn-success" href="/login">Login</a>
-                        <a class="btn btn-success" href="/signup">Signup</a>
-                        {{/if}}
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open"><i class="fa fa-bars"></i></div>
-        </div>
-    </header>
-    <!-- Header Section End -->
 
-    {{{body}}}
-    <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="/"><h3>Seek The World</h3></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>Categories</h6>
-                        <ul>
-                            <li><a href="#">Honey Moon</a></li>
-                            <li><a href="#">Family Tours</a></li>
-                            <li><a href="#">Vacation</a></li>
-                            <li><a href="#">Desert</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>Shopping</h6>
-                        <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Easy Payment</a></li>
-                            <li><a href="#">Simple Refunds</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>NewLetter</h6>
-                        <div class="footer__newslatter">
-                            <p>Keep In Touch With Us We are free to help you at every time</p>
-                            <form action="#">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit"><span class="icon_mail_alt"></span></button>
-                            </form>
-                        </div>
+{{{body}}}
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="/">
+                            <h3 class="text-white">Seek The World</h3>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- Footer Section End -->
-
-
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="footer__widget">
+                    <h6>Categories</h6>
+                    <ul>
+                        <li><a href="#">Honey Moon</a></li>
+                        <li><a href="#">Family Tours</a></li>
+                        <li><a href="#">Vacation</a></li>
+                        <li><a href="#">Desert</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Easy Payment</a></li>
+                        <li><a href="#">Simple Refunds</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="footer__widget">
+                    <h6>NewLetter</h6>
+                    <div class="footer__newslatter">
+                        <p>Keep In Touch With Us We are free to help you at every time</p>
+                        <form action="#">
+                            <input type="text" placeholder="Your email">
+                            <button type="submit"><span class="icon_mail_alt"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->

@@ -7,55 +7,55 @@ const mongoose = require('mongoose')
 module.exports = {
     doLogin: (adminData) => {
         return new Promise(async (resolve, reject) => {
-            try{
-            let loginStatus = false
-            let response = {}
-            let admin = await User.findOne({ role: true, email: adminData.email })
-            if (admin) {
-                bcrypt.compare(adminData.password, admin.password).then((status) => {
-                    if (status) {
-                        console.log('login success');
-                        response.status = true;
-                        resolve(response)
-                    } else {
-                        console.log('login failed');
-                        response.status = false;
-                        response.passErr = true
-                        resolve(response)
-                    }
+            try {
+                let loginStatus = false
+                let response = {}
+                let admin = await User.findOne({ role: true, email: adminData.email })
+                if (admin) {
+                    bcrypt.compare(adminData.password, admin.password).then((status) => {
+                        if (status) {
+                            console.log('login success');
+                            response.status = true;
+                            resolve(response)
+                        } else {
+                            console.log('login failed');
+                            response.status = false;
+                            response.passErr = true
+                            resolve(response)
+                        }
 
-                })
-            } else {
-                console.log('login failed*');
-                response.status = false;
-                response.emailErr = true
-                resolve(response)
+                    })
+                } else {
+                    console.log('login failed*');
+                    response.status = false;
+                    response.emailErr = true
+                    resolve(response)
+                }
+            } catch (error) {
+                reject(error)
             }
-        }catch(error){
-            reject(error)
-        }
 
         })
     },
     doSignup: (userData) => {
         return new Promise(async (resolve, reject) => {
-            try{
-            userData.password = await bcrypt.hash(userData.password, 10)
-            User.create({
-                name: userData.name,
-                email: userData.email,
-                phone: userData.phone,
-                password: userData.password,
-                role: false,
-                isBlocked: false,
-            }).then((data) => {
-                console.log(data);
-                data.insertedId = true
-                resolve(data.insertedId);
-            })
-        }catch(error){
-            reject(error)
-        }
+            try {
+                userData.password = await bcrypt.hash(userData.password, 10)
+                User.create({
+                    name: userData.name,
+                    email: userData.email,
+                    phone: userData.phone,
+                    password: userData.password,
+                    role: false,
+                    isBlocked: false,
+                }).then((data) => {
+                    console.log(data);
+                    data.insertedId = true
+                    resolve(data.insertedId);
+                })
+            } catch (error) {
+                reject(error)
+            }
         })
 
     },
@@ -92,34 +92,51 @@ module.exports = {
 
     },
 
+    // forgetPassword: (user) => {
+    //     const phone = user.phone
+    //     const response = {}
+    //     return new Promise(async (resolve, reject) => {
+    //         try {
+    //             const user = await User.findOne({ phone: phone })
+    //             if (!user) {
+    //                 response.userNotExist = true
+    //                 resolve(response)
+    //             }
+    //             else {
+    //                 resolve(response)
+    //             }
+    //         } catch (error) {
+    //             reject(error)
+    //         }
+    //     })
+    // },
     forgetPassword: (user) => {
-        const phone = user.phone
-        const response = {}
         return new Promise(async (resolve, reject) => {
             try {
-                const user = await User.findOne({ phone: phone })
+                const response = {}
+                const email = user.email
+                const exist = await User.findOne({ email: email, role: false, isBlocked: false })
                 if (!user) {
                     response.userNotExist = true
                     resolve(response)
                 }
                 else {
-                    resolve(response)
+                    resolve(exist)
                 }
             } catch (error) {
                 reject(error)
             }
         })
     },
-    updatePassword: (updates) => {
-        const updatePhone = updates.phone
+    updatePassword: (email,updates) => {
         let updatePassword = updates.password
         return new Promise(async (resolve, reject) => {
-            try{
-            updatePassword = await bcrypt.hash(updatePassword, 10)
-            const update = await User.updateOne({ phone: updatePhone }, { $set: { password: updatePassword } })
-            console.log(update)
-            resolve(update)
-            }catch(error){
+            try {
+                updatePassword = await bcrypt.hash(updatePassword, 10)
+                const update = await User.updateOne({ email: email }, { $set: { password: updatePassword } })
+                console.log(update)
+                resolve(update)
+            } catch (error) {
                 reject(error)
             }
         })
@@ -127,23 +144,23 @@ module.exports = {
 
     getUsers: () => {
         return new Promise(async (resolve, reject) => {
-            try{
-            let users = await User.aggregate([{
-                $match:
+            try {
+                let users = await User.aggregate([{
+                    $match:
+                    {
+                        role: false
+                    }
+                },
                 {
-                    role: false
-                }
-            },
-            {
-                $project: {
-                    role: 0,
-                    __v: 0
-                }
-            }])
-            resolve(users)
-        }catch(error){
-            reject(error)
-        }
+                    $project: {
+                        role: 0,
+                        __v: 0
+                    }
+                }])
+                resolve(users)
+            } catch (error) {
+                reject(error)
+            }
         })
     },
     blockUser: (user) => {
@@ -180,19 +197,19 @@ module.exports = {
     },
     doUnique: (userData) => {
         return new Promise(async (resolve, reject) => {
-            try{
-            let valid = {}
-            let email = await User.findOne({ email: userData.email })
-            if (email) {
-                valid.exist = true
-                resolve(valid)
+            try {
+                let valid = {}
+                let email = await User.findOne({ email: userData.email })
+                if (email) {
+                    valid.exist = true
+                    resolve(valid)
+                }
+                else {
+                    resolve(valid)
+                }
+            } catch (error) {
+                reject(error)
             }
-            else {
-                resolve(valid)
-            }
-        }catch(error){
-            reject(error)
-        }
 
         })
     },
@@ -225,39 +242,39 @@ module.exports = {
         const userId = mongoose.Types.ObjectId(user)
         console.log(userId)
         return new Promise(async (resolve, reject) => {
-            try{
-            const profile = await User.aggregate([
-                {
-                    $match:
+            try {
+                const profile = await User.aggregate([
                     {
-                        _id: userId,
-                        isBlocked: false
+                        $match:
+                        {
+                            _id: userId,
+                            isBlocked: false
+                        }
                     }
-                }
-            ])
-            console.log(profile)
-            resolve(profile[0])
-        }catch(error){
-        reject(error)
-        }
+                ])
+                console.log(profile)
+                resolve(profile[0])
+            } catch (error) {
+                reject(error)
+            }
         })
     },
-    isBlocked: (userId)=>{
-        return new Promise(async(resolve,reject)=>{
-            try{
-            let status = {}
-            const user = mongoose.Types.ObjectId(userId)
-            const isBlocked = await User.findOne({_id:user,isBlocked:true})
-            if(isBlocked){
-                status.blocked=true
-                resolve(status)
-            }else{
-                status.blocked=false
-                resolve(status)
+    isBlocked: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let status = {}
+                const user = mongoose.Types.ObjectId(userId)
+                const isBlocked = await User.findOne({ _id: user, isBlocked: true })
+                if (isBlocked) {
+                    status.blocked = true
+                    resolve(status)
+                } else {
+                    status.blocked = false
+                    resolve(status)
+                }
+            } catch (error) {
+                reject(error)
             }
-        }catch(error){
-            reject(error)
-        }
         })
     },
     notBlocked: (user) => {
@@ -277,65 +294,65 @@ module.exports = {
     },
     updateUser: (userId, purpose, value) => {
         return new Promise(async (resolve, reject) => {
-            try{
-            const user = mongoose.Types.ObjectId(userId)
-            if (purpose == 'userName') {
-                await User.updateOne(
-                    { _id: user }, {
-                    $set:
-                    {
-                        name: value
-                    }
-                }).then(() => {
-                    resolve()
-                })
-            } else if (purpose == 'email') {
-                console.log(value)
-                await User.updateOne(
-                    { _id: user }, {
-                    $set:
-                    {
-                        email: value
-                    }
-                }).then(() => {
-                    resolve()
-                })
-            } else if (purpose == 'passport') {
-                console.log(value)
-                await User.updateOne(
-                    { _id: user }, {
-                    $set:
-                    {
-                        passportNumber: value
-                    }
-                }).then(() => {
-                    resolve()
-                })
+            try {
+                const user = mongoose.Types.ObjectId(userId)
+                if (purpose == 'userName') {
+                    await User.updateOne(
+                        { _id: user }, {
+                        $set:
+                        {
+                            name: value
+                        }
+                    }).then(() => {
+                        resolve()
+                    })
+                } else if (purpose == 'email') {
+                    console.log(value)
+                    await User.updateOne(
+                        { _id: user }, {
+                        $set:
+                        {
+                            email: value
+                        }
+                    }).then(() => {
+                        resolve()
+                    })
+                } else if (purpose == 'passport') {
+                    console.log(value)
+                    await User.updateOne(
+                        { _id: user }, {
+                        $set:
+                        {
+                            passportNumber: value
+                        }
+                    }).then(() => {
+                        resolve()
+                    })
+                }
+            } catch (error) {
+                reject(error)
             }
-        }catch(error){
-            reject(error)
-        }
         })
     },
     updateAddress: (address, userId) => {
         const user = mongoose.Types.ObjectId(userId)
         return new Promise(async (resolve, reject) => {
-            try{
-            await User.updateOne({ _id: user }, {
-                $set: {
-                    'address.house': address.house,
-                    'address.place': address.place,
-                    'address.post': address.post,
-                    'address.pinCode': address.pinCode,
-                    'address.city': address.city,
-                    'address.district': address.district,
-                    'address.state': address.state
-                }
-            })
-            resolve()
-        }catch(errro){
-            reject(error)
-        }
+            try {
+                await User.updateOne({ _id: user }, {
+                    $set: {
+                        'address.house': address.house,
+                        'address.place': address.place,
+                        'address.post': address.post,
+                        'address.pinCode': address.pinCode,
+                        'address.city': address.city,
+                        'address.district': address.district,
+                        'address.state': address.state
+                    }
+                })
+                resolve()
+            } catch (errro) {
+                reject(error)
+            }
         })
     },
     updatePhone: (phone) => {
@@ -350,16 +367,16 @@ module.exports = {
     updateProfileImg: (userId, profile) => {
         const user = mongoose.Types.ObjectId(userId)
         return new Promise(async (resolve, reject) => {
-            try{
-            await User.updateOne({ _id: user },
-                {
-                    $set:
+            try {
+                await User.updateOne({ _id: user },
                     {
-                        profileImage: profile
-                    }
-                })
-        resolve('success')
-            }catch(error){
+                        $set:
+                        {
+                            profileImage: profile
+                        }
+                    })
+                resolve('success')
+            } catch (error) {
                 reject(error)
             }
         })
