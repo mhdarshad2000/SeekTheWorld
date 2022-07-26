@@ -7,12 +7,12 @@
 
             <div class=" ">
                 
-              <p>The OTP has been sent to your number <br> +91-{{phone}}</p>
+              <p>The OTP has been sent to your number <br> +91-{{phone.phone}}</p>
 
               
-<form action="/forgetOtpverify" method="post">
+<form action="/forgetOtpverify" method="post" id="forgetVerify">
               <div class="form-outline form-white d-flex justify-content-center">
-                <input type="text" name="otp" class="form-control w-50 border border-secondary text-center form-control-md rounded" minlength="6" maxlength="6" required/>
+                <input type="number" name="otp" class="form-control w-50 border border-secondary text-center form-control-md rounded" minlength="6" maxlength="6" required/>
               </div>
 
               <button class="btn btn-info btn-md my-3" type="submit">submit</button>
@@ -30,3 +30,16 @@
     </div>
   </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- Jquery Validation -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
+
+
+<script>
+
+  $("#forgetVerify").validate();
+</script>

@@ -1,101 +1,28 @@
-<!-- validate jquery-->
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
-      
-<div class="container">
+<section class="vh-100" style="background-image:url('/uploads/charlotte-noelle-98WPMlTl5xo-unsplash.jpg')">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: #ffffff;">
+          <div class="card-body p-5 text-center" >
 
-<section class="h-100 bg-image">
-  <div class="mask d-flex align-items-center h-75 gradient-custom-3">
-    <div class="container h-75">
-      <div class="row d-flex justify-content-center align-items-center h-75">
-        <div class="col-12 col-md-9 col-lg-9 col-xl-7">
-          <div class="card shadow-sm px-3 bg-white rounded" style=" border-radius: 15px;">
-            <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-3">signup</h2>
-
+            <h2 class="text-uppercase text-center mb-3">signup</h2>
               <form name="userSignup" action="/signup" method="post" id="userSignup">
 
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="name">Your Name</label>
-                  <input type="text" id="name" name="name" minlength="4" required class="form-control form-control-lg" />
-                  
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="email">Your Email</label>
-                  <input type="email" id="email" name="email" minlength="4" required class="form-control form-control-lg" />
+                <input type="text" placeholder="name" id="name" name="name" minlength="4" required class="form-control form-control-lg mb-3" />
+                <input type="email" placeholder="email" id="email" name="email" minlength="4" required class="form-control form-control-lg mb-3" />
                   {{#if exist}}
                   <h5 class="text-danger text-capitalize">Email already exists</h5>
                   {{/if}}
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="name">Phone Number</label>
-                  <input type="text" id="Number" name="phone" minlength="10" maxlength="10" required class="form-control form-control-lg" />
-                  
-                </div>
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="password">Password</label>
-                  <input type="password" id="password" name="password" minlength="4" required class="form-control form-control-lg" />
-                  
-                </div>
-
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="conpassword">Repeat your password</label>
-                  <input type="password" id="conpassword" name="con-password" minlength="4" required class="form-control form-control-lg" />
-                  
-                  
-
-    {{!--  Validate Confirm Password --}}
-                  <h6 id="conpasscheck" style="color: red;">
-                        Password didn't match
-                    </h6>
-
-
-                </div>
-
-
-                <div class="d-flex justify-content-center">
-                  <button type="submit"
+<input type="number" id="Number" placeholder="phone" name="phone" minlength="10" maxlength="10" required class="form-control form-control-lg mb-3" /> 
+  <input type="password" id="password" placeholder="password" name="password" minlength="4" required class="form-control form-control-lg mb-3" /> 
+                         <input type="password" placeholder="conmfirm password" id="con_password" name="con_password" minlength="4" required class="form-control form-control-lg mb-3" />
+         <button type="submit"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                </div>
-
-                
-
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/"
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
                     class="fw-bold text-body"><u>Login here</u></a></p>
 
-              </form>
-
-
-              {{!-- validation --}}
-
-<script>
-    $("#userSignup").validate();
-
-    // Validate Confirm Password
-  $("#conpasscheck").hide();
-  let confirmPasswordError = true;
-  $("#conpassword").keyup(function () {
-    validateConfirmPassword();
-  });
-  function validateConfirmPassword() {
-    let confirmPasswordValue = $("#conpassword").val();
-    let passwordValue = $("#password").val();
-    if (passwordValue != confirmPasswordValue) {
-      $("#conpasscheck").show();
-      $("#conpasscheck").html("Password didn't Match");
-      $("#conpasscheck").css("color", "red");
-      confirmPasswordError = false;
-      return false;
-    } else {
-      $("#conpasscheck").hide();
-    }
-  }
-</script>
-
-
-            </div>
+            </form>
+            
           </div>
         </div>
       </div>
@@ -103,9 +30,70 @@
   </div>
 </section>
 
-</div>
+
+
+
+
 <style>
-  .error{
+  .valierrors{
     color:red;
   }
 </style>
+
+<!-- Jquery Core CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- Jquery Validation -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
+    <script>
+jQuery.validator.addMethod("lettersonly", function (value, element) {
+        return this.optional(element) || /^[a-z]+$/i.test(value);
+    }, "Letters only please");
+
+    $.validator.addMethod("noCaps", function (value, element) {
+        return this.optional(element) || !/[A-Z]/.test(value);
+    }, "email can't have upper case letters")
+
+
+    $("#userSignup").validate({
+      errorClass: "valierrors",
+  
+      rules:{
+        name:{
+          required:true,
+          minlength:3,
+          lettersonly:true
+        },
+  
+        email:{
+          required:true,
+          email:true,
+          noCaps:true
+        },
+  
+        phone:{
+          required:true,
+          minlength:10,
+          number:true
+        },
+  
+        password:{
+          required:true,
+          minlength: 5
+        },
+        con_password:{
+            required:true,
+            equalTo:'#password'
+        }
+      },
+      messages:{
+        con_password:{
+          equalTo:"Passwords are not match"
+        }
+      }
+    })
+    </script>
+    

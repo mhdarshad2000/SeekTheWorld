@@ -90,7 +90,6 @@ module.exports = {
                     couponCode:1
                 }
             }])
-            console.log(fetchedCoupon)
             resolve(fetchedCoupon)
             }catch(error){
                 reject(error)

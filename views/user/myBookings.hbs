@@ -65,7 +65,15 @@
 </table>
 </div>
 {{else}}
-<p>no active</p>
+<div class='row'>
+          <div class='col-sm-12 empty-cart-cls text-center'>
+            <img src='/uploads/booking.jpg' width='130' height='130' class='img-fluid mb-4 mr-3' />
+            <h3><strong>Your Active bookings is Empty</strong></h3>
+            <h4>Book Packages to seek the mysteries of world :)</h4>
+            <a href='/package' class='btn btn-primary cart-btn-transform m-3' data-abc='true'>continue Booking</a>
+
+          </div>
+        </div>
 {{/if}}
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -101,7 +109,15 @@
 </table>
 </div>
 {{else}}
-<p>no upcoming</p>
+<div class='row'>
+          <div class='col-sm-12 empty-cart-cls text-center'>
+            <img src='/uploads/booking.jpg' width='130' height='130' class='img-fluid mb-4 mr-3' />
+            <h3><strong>You have no upcoming bookings</strong></h3>
+            <h4>Book Packages to seek the mysteries of world :)</h4>
+            <a href='/package' class='btn btn-primary cart-btn-transform m-3' data-abc='true'>continue Booking</a>
+
+          </div>
+        </div>
   {{/if}}
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -137,7 +153,15 @@
 </table>
 </div>
 {{else}}
-<p>no cancelled</p>
+<div class='row'>
+          <div class='col-sm-12 empty-cart-cls text-center'>
+            <img src='/uploads/booking.jpg' width='130' height='130' class='img-fluid mb-4 mr-3' />
+            <h3><strong>Your Cancelled bookings are Empty</strong></h3>
+            <h4>Book Packages to seek the mysteries of world :)</h4>
+            <a href='/package' class='btn btn-primary cart-btn-transform m-3' data-abc='true'>continue Booking</a>
+
+          </div>
+        </div>
 {{/if}}
   </div>
 
@@ -174,8 +198,15 @@
 </table>
 </div>
 {{else}}
-<p>no completed</p>
-{{/if}}
+<div class='row'>
+          <div class='col-sm-12 empty-cart-cls text-center'>
+            <img src='/uploads/booking.jpg' width='130' height='130' class='img-fluid mb-4 mr-3' />
+            <h3><strong>You have not Completed any Bookings Yet</strong></h3>
+            <h4>Book Packages to seek the mysteries of world :)</h4>
+            <a href='/package' class='btn btn-primary cart-btn-transform m-3' data-abc='true'>continue Booking</a>
+
+          </div>
+        </div>{{/if}}
   </div>
 
 </div>

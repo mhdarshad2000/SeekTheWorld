@@ -3,7 +3,10 @@
 <section class="hero">
         <div class="hero__slider owl-carousel">
 			{{#each banner}}
-            <div class="hero__items" style="background-image: url('/uploads/{{this.Banner.images.[0]}}') ;background-repeat: no-repeat;">
+            <div class="hero__items" style="background-image: url('/uploads/{{this.Banner.images.[0]}}') ;   
+             background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">

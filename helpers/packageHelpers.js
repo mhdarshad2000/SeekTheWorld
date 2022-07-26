@@ -2,6 +2,7 @@ var db = require('../config/connections')
 const mongoose = require('mongoose')
 var Package = require('../models/package')
 var Category = require('../models/category')
+const User = require('../models/user')
 
 module.exports = {
   addPackage: (package, files) => {
@@ -104,7 +105,6 @@ module.exports = {
   },
   fetchPackage: (id) => {
     let package_id = mongoose.Types.ObjectId(id)
-    // const userId=mongoose.Types.ObjectId(user)
     return new Promise(async (resolve, reject) => {
       let pack = await Package.aggregate([{ $match: { _id: package_id, isDeleted: false } },
       {
@@ -298,6 +298,92 @@ module.exports = {
           }}
         }
       ])
+    })
+  },
+  isCompletedBooking : (userId,packageId)=>{
+    return new Promise(async(resolve,reject)=>{
+      try{
+        const user = mongoose.Types.ObjectId(userId)
+        const package = mongoose.Types.ObjectId(packageId)
+        const completed = await User.aggregate([
+          {
+            '$unwind': {
+              'path': '$booking'
+            }
+          }, {
+            '$match': {
+              'booking.package': package, 
+              '_id': user,
+              'booking.paymentStatus':"Paid",
+              'booking.returnDate':{'$gt':new Date()},              
+            }
+          }
+        ])
+        resolve(completed)
+      }catch(error){
+        reject(error)
+      }
+    }
+    )
+  },
+  postReview : (reviewData,userId)=>{
+    return new Promise(async(resolve,reject)=>{
+      try{
+        console.log(reviewData)
+        const packageId = mongoose.Types.ObjectId(reviewData.package)
+        const user = mongoose.Types.ObjectId(userId)
+        const review = await Package.updateOne({_id:packageId},{
+          //add to set is used
+          $addToSet:{reviews:{
+            user:user,
+            ratings:reviewData.rate,
+            reviews:reviewData.review,
+            date:new Date()
+          }
+          }
+        })
+        console.log(review)
+        resolve(review)
+      }catch(error){
+        reject(error)
+      }
+    })
+  },
+  getReviews : (packageId)=>{
+    return new Promise(async(resolve,reject)=>{
+      try{
+        const package= mongoose.Types.ObjectId(packageId)
+        const reviews = await Package.aggregate([
+          {
+            '$match': {
+              '_id': package
+            }
+          }, {
+            '$unwind': {
+              'path': '$reviews'
+            }
+          }, {
+            '$lookup': {
+              'from': 'users', 
+              'localField': 'reviews.user', 
+              'foreignField': '_id', 
+              'as': 'user'
+            }
+          }, {
+            '$unwind': {
+              'path': '$user'
+            }
+          }, {
+            '$project': {
+              'user.name': 1, 
+              'reviews': 1
+            }
+          }
+        ]) 
+        resolve(reviews)
+      }catch(error){
+        reject(error)
+      }
     })
   }
 

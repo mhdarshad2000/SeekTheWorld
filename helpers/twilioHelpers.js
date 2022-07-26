@@ -11,7 +11,6 @@ module.exports={
                 channel:"sms"
             }).then((res)=>{
                 resp.valid=true
-                console.log(res)
                 resolve(res)      
             })   
         })

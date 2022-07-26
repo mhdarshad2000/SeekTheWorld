@@ -1,6 +1,5 @@
 module.exports = {
     totalAmount :(price,user,coupon)=>{
-console.log(user)
         let response={}
         return new Promise((resolve,reject)=>{
             try{

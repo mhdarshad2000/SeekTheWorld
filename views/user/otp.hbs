@@ -16,7 +16,7 @@
               <p>The OTP has been sent to your number <br> +91-{{phone}}</p>
 
               
-<form action="/otpverify" method="post">
+<form action="/otpverify" method="post" id="otpVer">
               <div class="form-outline form-white d-flex justify-content-center">
                 <input type="text" name="otp" class="form-control w-50 border border-secondary text-center form-control-md rounded" minlength="6" maxlength="6" required/>
               </div>
@@ -38,3 +38,16 @@
     </div>
   </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- Jquery Validation -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
+
+
+<script>
+  $("#otpVer").validate();
+</script>

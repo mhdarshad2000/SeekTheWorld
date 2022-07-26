@@ -264,16 +264,21 @@ router.get('/viewPackages',checkBlocked,async(req,res,next)=>{
 
 router.get('/fetchpackage/:id',checkBlocked,async(req,res,next)=>{
   try{
+    var completed = false
+    login = false
     if(req.session.userloggedIn){
+      
       const user = req.session.userProfile._id
-      var packageInfo=await packageHelpers.fetchPackage(req.params.id)
+      const packageCompleted = await packageHelpers.isCompletedBooking(user,req.params.id)
+      if(packageCompleted.length > 0){
+       completed = true
+      }
       login = true
-    }else{
-      login = false
-      var packageInfo=await packageHelpers.fetchPackage(req.params.id)
-    }  
+    }
+    const  packageInfo=await packageHelpers.fetchPackage(req.params.id)
+    // const reviews = await packageHelpers.getReviews(req.params.id)
   const relatedPackage = await packageHelpers.relatedPackage(packageInfo[0].category)
-  res.render('user/eachPackage',{login,packageInfo,layout:"User-layout",user:true,relatedPackage})
+  res.render('user/eachPackage',{login,packageInfo,layout:"User-layout",user:true,relatedPackage,completed})
   }catch(error){
     next(error)
   }
@@ -320,6 +325,7 @@ router.get('/booking',checkBlocked,verifyLogin,async(req,res,next)=>{
     var amount = await calculationHelpers.totalAmount(packageDetails,bookingPrice,couponDiscount)
     const form = req.session.bookingData
     const coupon = await couponHelpers.getCoupon()
+    console.log(form)
   res.render('user/booking',{user:true,layout:"User-layout",login:true,amount,form,user,packageDetails,coupon,couponName})
   }else{
     res.redirect('/')
@@ -364,8 +370,8 @@ router.post('/verifyPayment',verifyLogin,checkBlocked,async(req,res,next)=>{
       const subject = 'Booking Has Been Confirmed'
       const order = await bookingHelpers.getBooking(req.session.userProfile._id,req.body['order[receipt]'])
       const book = order[0]
-      console.log(book)
-      const text = 'Congratulations !!!!.."\br" Your Payment of' +' ' +book.totalPrice +' '+ 'for the booking of' +' '+   book.packagename + ' '+
+
+      const text = 'Congratulations !!!!.. Your Payment of' +' ' +book.totalPrice +' '+ 'for the booking of' +' '+   book.packagename + ' '+
       'has been recieved. And Your travel has been shceduled to the date' + ' ' + book.boarding+ '\n Seek The World'
       const doEmail = await nodemailer.doEmail(mail,subject,text)
       if(req.session.coupon){
@@ -379,7 +385,6 @@ router.post('/verifyPayment',verifyLogin,checkBlocked,async(req,res,next)=>{
     })
   })
 }catch(error){
-    console.log(error)
     res.json({status:false,errMsg:""})
   }
 })
@@ -413,7 +418,6 @@ router.get('/booking/cancel/:id',verifyLogin,checkBlocked,async(req,res,next)=>{
     const mail = req.session.userProfile.email
       const subject = 'Booking Has Been Cancelled'
       const book = orderDetails[0]
-      console.log(book)
       const text = 'Your Cancellation of' +' ' +book.package.name +' '+ 'Is successful And the amount of'+' ' + book.booking.totalPrice+ ' ' +'will be credited to your account.\n Seek The World'
       const doEmail = await nodemailer.doEmail(mail,subject,text)
     res.redirect('/myBookings')
@@ -579,7 +583,6 @@ router.get('/aboutUs',checkBlocked,async(req,res,next)=>{
   let about = await Promise.all([
   dashboardHelpers.packages(),
  dashboardHelpers.countUsers()])
- console.log(about[0])
   res.render('user/about',{layout:"User-layout",user:true,login,packages:about[0],users:about[1]})
   }catch(error){
     next(error)
@@ -587,10 +590,17 @@ router.get('/aboutUs',checkBlocked,async(req,res,next)=>{
 })
 router.get('/booking/view/:id',verifyLogin,checkBlocked,async(req,res,next)=>{
   try{
-    console.log(req.params.id)
     const viewBooking = await bookingHelpers.getTheOrder(req.params.id)
-    console.log(viewBooking)
     res.render('user/invoice',{layout:"User-layout",user:true,login:true,viewBooking})
+  }catch(error){
+    next(error)
+  }
+})
+router.post('/submitReview',verifyLogin,checkBlocked,async(req,res)=>{
+  try{
+    const user = req.session.userProfile._id
+    const updateReview = await packageHelpers.postReview(req.body,user)
+    res.json({status:true})
   }catch(error){
     next(error)
   }

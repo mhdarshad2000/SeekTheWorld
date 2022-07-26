@@ -60,8 +60,6 @@ router.get('/dashboard',verifyAdminLogin,async(req,res,next)=>{
      const categoryWise = await dashboardHelpers.categoryPrice()
      const dailyRevenue = await dashboardHelpers.dailyRevenue()
      const dailyRefund = await dashboardHelpers.dailyRefund()
-     console.log(dailyRevenue)
-console.log(categoryWise)
   const totalBookingLength = bookingCount.length
     const bookings = {bookingCount,totalBookingLength}
      res.render('admin/admin-dashboard',{layout:"layout",
@@ -218,7 +216,6 @@ router.get('/edit-package/:id',verifyAdminLogin,async(req,res,next)=>{
 })
 
 router.post('/package/edit/:id',verifyAdminLogin,store.array('Image',12),async(req,res,next)=>{
-  console.log(req.files)
   const package = req.params.id
   let img = []
   if(req.files.length>0){

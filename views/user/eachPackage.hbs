@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 
 <!-- Shop Details Section End -->
 <link rel="stylesheet" href="/userElem/css/single.css">
@@ -30,13 +30,13 @@
 <!-- Product Details Section Begin -->
 <section class="product-details spad">
     <style>
-        .container{
+        .container {
             max-width: 1200px;
         }
-        .content{
+
+        .content {
             max-width: 1361px;
         }
-
     </style>
     <div class="container">
         <div class="row">
@@ -104,17 +104,22 @@
                         </div>
 
                         <div class="product__details__cart__option">
-                            <div class="quantity">
-                                <label for="">Adult</label>
-                                <div class="pro-qty">
-                                    <input type="Number" name="adultCount" value="1" required>
-                                </div>
+                            <div class="d-flex">
+                            <div class="col-md-3 d-flex mr-4">
+                                <span class="minus">
+                                    -
+                                </span>
+                                <input class="input-qty" name="adultCount" type="number" value="1" readonly>
+                                <span class="plus">+</span>
                             </div>
-                            <div class="quantity">
-                                <label for="">Child</label>
-                                <div class="pro-qty">
-                                    <input type="Number" name="childCount" value="0" required>
-                                </div>
+
+                            <div class="col-md-3 d-flex ">
+                                <span class="minus">
+                                    -
+                                </span>
+                                <input class="input-qty" name="childCount" type="number" value="0" readonly>
+                                <span class="plus">+</span>
+                            </div>
                             </div>
                             <input type="text" name="package" value="{{this._id}}" hidden>
                             <div class="col d-grid">
@@ -123,7 +128,7 @@
                         </div>
                     </form>
                 </div>
-                
+
                 <div class="product__details__last__option">
                     <ul>
                         <li><span>Category:</span> {{this.category.categoryName}}</li>
@@ -133,7 +138,6 @@
         </div>
 
     </div>
-            
 
     <div class="container content">
         <div class="row ">
@@ -141,8 +145,110 @@
             <p>{{this.description}}</p>
             {{/each}}
         </div>
+        <br>
+    <br>
+    <div class="d-flex justify-content-center">
+        <hr class="w-75 text-center">
+        <br>
     </div>
+        {{!-- {{#each reviews}}
+        <div class="row">
+ 
+            <div class="card border-primary mb-3 w-100" >
+  <div class="card-body text-primary">
+    <h4>{{this.user.name}}<span>{{this.reviews.date}}</span></h4>
+    <div class="star-rating">
+                            <input type="radio" id="5-stars" name="rate" hidden />
+                            <label for="5-stars" class="star">&#9733;</label>
+                            <input type="radio" id="4-stars" name="rate" hidden />
+                            <label for="4-stars" class="star">&#9733;</label>
+                            <input type="radio" id="3-stars" name="rate" hidden />
+                            <label for="3-stars" class="star">&#9733;</label>
+                            <input type="radio" id="2-stars" name="rate" hidden />
+                            <label for="2-stars" class="star">&#9733;</label>
+                            <input type="radio" id="1-star" name="rate" hidden />
+                            <label for="1-star" class="star">&#9733;</label>
+                        </div>
+    <script>
+       if("{{this.reviews.ratings}}"=="5"){
+       }
+    </script>
+    <h5 class="card-title">{{this.reviews.ratings}}</h5>
+    <p class="card-text">{{this.reviews.reviews}}</p>
+  </div>
+</div>
+            
+            
+        </div>
+        {{/each}}
+    </div>
+
     
+
+    <br>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                            <h2>Reviews</h2>
+                            <button class="rating_circle">4.1</button>
+                            <div>
+                                <div class="stars-outer mt-4">
+                                    <div class="stars-inner"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="progress mt-5" style="height:10px">
+                               <div class="progress-bar dark" style="width:70%;height:10px"></div>
+                            </div>
+                            <div class="progress mt-3" style="height:10px">
+                                <div class="progress-bar dark" style="width:10%;height:10px"></div>
+                            </div>
+                            <div class="progress mt-3" style="height:10px">
+                                <div class="progress-bar dark" style="width:10%;height:10px"></div>
+                            </div>
+                            <div class="progress mt-3" style="height:10px">
+                                <div class="progress-bar dark" style="width:5%;height:10px"></div>
+                            </div>
+                            <div class="progress mt-3" style="height:10px">
+                                <div class="progress-bar dark" style="width:5%;height:10px"></div>
+                            </div>                
+                        </div>
+                </div>
+            </div>
+            {{#if completed}}
+            <div class="col-md-6">
+                <div class="row">
+                    <form id="rating">
+                        <div class="star-rating">
+                            <input type="radio" id="5-stars" name="rate" value="5" />
+                            <label for="5-stars" class="star">&#9733;</label>
+                            <input type="radio" id="4-stars" name="rate" value="4" />
+                            <label for="4-stars" class="star">&#9733;</label>
+                            <input type="radio" id="3-stars" name="rate" value="3" />
+                            <label for="3-stars" class="star">&#9733;</label>
+                            <input type="radio" id="2-stars" name="rate" value="2" />
+                            <label for="2-stars" class="star">&#9733;</label>
+                            <input type="radio" id="1-star" name="rate" value="1" />
+                            <label for="1-star" class="star">&#9733;</label>
+                        </div>
+                </div>
+                <div class="row">
+                    <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    {{#each packageInfo}}
+                    <input type="text" name="package" value="{{this._id}}" hidden>
+                    {{/each}}
+                    <button class="btn btn-primary ml-auto mt-3">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{/if}}
     <br>
     <br>
     <div class="d-flex justify-content-center">
@@ -150,9 +256,8 @@
     </div>
 
     <br>
-
     <div class="container content">
-        <div class="row ">
+        <div class="row "> --}}
 
 
             <h3 class=" mb-4">Related Package</h3>
@@ -173,7 +278,7 @@
                                 </div>
                                 <div class="d-flex align-items-center"> <span class="fs-0 fw-medium">{{this.days}} Days
                                         Trip</span>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -186,36 +291,6 @@
     </div>
 </section>
 
-<script>
-    $(document).ready(function () {
-
-        $('.increment-btn').click(function (e) {
-            e.preventDefault();
-            var incre_value = $(this).parents('.quantity').find('.qty-input').val();
-            var value = parseInt(incre_value, 10);
-            value = isNaN(value) ? 0 : value;
-            if (value < 10) {
-                value++;
-                $(this).parents('.quantity').find('.qty-input').val(value);
-            }
-
-        });
-
-        $('.decrement-btn').click(function (e) {
-            e.preventDefault();
-            var decre_value = $(this).parents('.quantity').find('.qty-input').val();
-            var value = parseInt(decre_value, 10);
-            value = isNaN(value) ? 0 : value;
-            if (value > 1) {
-                value--;
-                $(this).parents('.quantity').find('.qty-input').val(value);
-            }
-        });
-
-    });
-
-
-</script>
 <!-- Product Details Section End -->
 
 
@@ -223,5 +298,76 @@
 <script src="/user.js"></script>
 
 <script>
-  $("#booking").validate();
+    $("#booking").validate();
 </script>
+
+<script>
+    const $form = $('#rating')
+    $form.on('submit', submitHandler)
+
+    function submitHandler(e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/submitReview',
+            method: 'post',
+            data: $form.serialize(),
+            success: (response) => {
+                if (response.status) {
+                    window.location.reload()
+                }
+
+            }
+        })
+    }
+</script>
+
+
+<script>
+    $(document).ready(function(){
+    var ratings = 4.1;
+    var starTotal = 5;
+    var starPercentage = ratings / starTotal * 100;
+    var star = starPercentage+'%';
+    $(".stars-inner").width(star);
+});
+</script>
+
+
+    <script>
+    	$(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+		});
+</script>   
+
+
+<style>
+    .minus, .plus {
+    padding: 0 15px;
+    /* border: 1px solid black; */
+    margin: 0 5px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 900;
+    background-color: black;
+}
+.input-qty {
+    width: 70px;
+    text-align: center;
+    padding: 0 5px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+</style>

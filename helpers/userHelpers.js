@@ -14,11 +14,9 @@ module.exports = {
                 if (admin) {
                     bcrypt.compare(adminData.password, admin.password).then((status) => {
                         if (status) {
-                            console.log('login success');
                             response.status = true;
                             resolve(response)
                         } else {
-                            console.log('login failed');
                             response.status = false;
                             response.passErr = true
                             resolve(response)
@@ -26,7 +24,6 @@ module.exports = {
 
                     })
                 } else {
-                    console.log('login failed*');
                     response.status = false;
                     response.emailErr = true
                     resolve(response)
@@ -49,7 +46,6 @@ module.exports = {
                     role: false,
                     isBlocked: false,
                 }).then((data) => {
-                    console.log(data);
                     data.insertedId = true
                     resolve(data.insertedId);
                 })
@@ -67,12 +63,10 @@ module.exports = {
                 if (user) {
                     bcrypt.compare(userData.password, user.password).then((status) => {
                         if (status) {
-                            console.log('login success');
                             response.status = true;
                             response.user = user
                             resolve(response)
                         } else {
-                            console.log('login failed');
                             response.status = false;
                             response.passErr = true
                             resolve(response)
@@ -80,7 +74,6 @@ module.exports = {
 
                     })
                 } else {
-                    console.log('login failed*');
                     response.status = false;
                     response.emailErr = true
                     resolve(response)
@@ -134,7 +127,6 @@ module.exports = {
             try {
                 updatePassword = await bcrypt.hash(updatePassword, 10)
                 const update = await User.updateOne({ email: email }, { $set: { password: updatePassword } })
-                console.log(update)
                 resolve(update)
             } catch (error) {
                 reject(error)
@@ -165,7 +157,6 @@ module.exports = {
     },
     blockUser: (user) => {
         let uid = mongoose.Types.ObjectId(user)
-        console.log(uid)
         return new Promise(async (resolve, reject) => {
             try {
                 const block = await User.updateOne({ _id: uid }, {
@@ -223,7 +214,6 @@ module.exports = {
                 }
             })
         }).then(() => {
-            console.log("Inserted Succesfully")
         })
     },
     getBanner: () => {
@@ -235,12 +225,10 @@ module.exports = {
                 }
             }])
             resolve(banner)
-            console.log(banner)
         })
     },
     userDetails: (user) => {
         const userId = mongoose.Types.ObjectId(user)
-        console.log(userId)
         return new Promise(async (resolve, reject) => {
             try {
                 const profile = await User.aggregate([
@@ -252,7 +240,6 @@ module.exports = {
                         }
                     }
                 ])
-                console.log(profile)
                 resolve(profile[0])
             } catch (error) {
                 reject(error)
@@ -307,7 +294,6 @@ module.exports = {
                         resolve()
                     })
                 } else if (purpose == 'email') {
-                    console.log(value)
                     await User.updateOne(
                         { _id: user }, {
                         $set:
@@ -318,7 +304,6 @@ module.exports = {
                         resolve()
                     })
                 } else if (purpose == 'passport') {
-                    console.log(value)
                     await User.updateOne(
                         { _id: user }, {
                         $set:

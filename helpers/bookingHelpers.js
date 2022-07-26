@@ -13,7 +13,6 @@ module.exports = {
     doBooking: (user, totalPrice, booking) => {
         const userId = Mongoose.Types.ObjectId(user)
         const package = Mongoose.Types.ObjectId(booking.package)
-        console.log(package)
         return new Promise(async (resolve, reject,) => {
             try{
             const date = moment(new Date).format("YYYY-MM-DD")
@@ -127,7 +126,6 @@ module.exports = {
     },
 
     cancelBooking: (orderId, refundId) => {
-        console.log(refundId)
         const date = moment(new Date).format("YYYY-MM-DD")
         const order = Mongoose.Types.ObjectId(orderId)
         return new Promise(async (resolve, reject) => {

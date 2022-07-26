@@ -231,7 +231,6 @@ module.exports={
             }
           ])
           payment.push(values[0].refund)
-          console.log(10)
           resolve(payment)
         }catch(error){
           reject(error)

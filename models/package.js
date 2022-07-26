@@ -12,17 +12,21 @@ const packageSchema = new Schema({
         child:Number
     },
     description:String,
-    countries:[
-        {
-            type:String
-        }
-    ],
     days:{
         type:String
     },
     Image:{
         type:Array
     },
+    reviews:[{
+        user:{
+        type:Schema.Types.ObjectId,
+        ref:'users',
+        },
+        ratings:Number,
+        reviews:String,
+        reviewDate:Date
+    }],
     wishlists: [{
         type:Schema.Types.ObjectId,
         ref:'users'

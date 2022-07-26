@@ -49,7 +49,6 @@ module.exports = {
     },
     deleteCategory : (cat_id)=>{
         let id = mongoose.Types.ObjectId(cat_id)
-        console.log(id)
         return new Promise((resolve,reject)=>{
             try{
             Category.updateOne({_id:id},{
@@ -57,7 +56,6 @@ module.exports = {
                     isDeleted:true,
                     deletedDate:new Date()}
                 }).then(()=>{
-                    console.log("Deleted Succesfully")
             })
         }catch(error){
             reject(error)
@@ -67,7 +65,6 @@ module.exports = {
     editCategory : (cate_id,edcategory)=>{
 
         const edid = mongoose.Types.ObjectId(cate_id)
-        console.log(edid)
         return new Promise(async(resolve,reject)=>{
             try{
             const catExist = await Category.findOne({categoryName:edcategory.category})
@@ -102,7 +99,6 @@ module.exports = {
                     deletedDate: 0 } 
                 }
             ])
-            console.log(deleted)
             resolve(deleted)
             }catch(error){
                 reject(error)
@@ -117,7 +113,7 @@ module.exports = {
                 $set:{
                     isDeleted:false}
                 }).then(()=>{
-                    console.log("Deleted Succesfully")
+
             })
         }catch(error){
             reject(error)

@@ -144,3 +144,76 @@ img {
     margin-bottom: 24px;
   }
 }
+
+
+      .star-rating {
+ 
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:1.5em;
+  justify-content:space-around;
+  padding:0 .2em;
+  text-align:center;
+  width:5em;
+}
+
+.star-rating input {
+  display:none;
+}
+
+.star-rating label {
+  color:#ccc;
+  cursor:pointer;
+}
+
+.star-rating :checked ~ label {
+  color:#f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
+}
+
+/* explanation */
+
+
+
+.rating_circle{
+  width: 100px;
+  height: 100px;
+  border-radius: 70px;
+  border: 1px none;
+  font-size: 35px;
+}
+.rating_text{
+    margin-top: 38px;
+}
+.stars-outer {
+display: inline-block;
+position: relative;
+font-family: FontAwesome;
+font-size: 20px;
+letter-spacing: 5px;
+}
+
+.stars-outer::before {
+content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.stars-inner {
+position: absolute;
+top: 0;
+left: 0;
+white-space: nowrap;
+overflow: hidden;
+width: 0;
+}
+
+.stars-inner::before {
+content: "\f005 \f005 \f005 \f005 \f005";
+color: #000000;
+}
+.dark {
+  background-color: #000000;
+}

@@ -1,16 +1,29 @@
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<!-- Jquery Core CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
+    <!-- Jquery Validation -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
+    <script>
+jQuery.validator.addMethod("lettersonly", function (value, element) {
+        return this.optional(element) || /^[a-z]+$/i.test(value);
+    }, "Letters only please");
+
+    $.validator.addMethod("noCaps", function (value, element) {
+        return this.optional(element) || !/[A-Z]/.test(value);
+    }, "email can't have upper case letters")
+    </script>
 <section>
     <div class="container col-md-12 mt-4">
         <div class="row">
             <div class="col-md-12 text-dark fs-4 fw-bold">
                 <h2 class="text-center">Add Package</h2>
-                <form action="/admin/add-package" method="post" id="add-product" enctype="multipart/form-data">
+                <form action="/admin/add-package" method="post" id="add_product" enctype="multipart/form-data">
                     <div class="form-outline mb-4">
                         <label for="name">Name</label>
-                        <input type="text" name="Name" id="name" class="form-control" minlength="3" required>
+                        <input type="text" name="Name" id="name" class="form-control" minlength="3" lettersonly="true" required>
                     </div>
                    <div class="form-group">
                     <label for="exampleFormControlSelect2">Category</label>
@@ -40,7 +53,7 @@
                     <div class="form-row form_img">
                                     <div class="grid">
                                         <div class="form-element">
-                                            <input type="file" id="file-1" accept="image/*" name="Image">
+                                            <input type="file" id="file-1" accept="image/*" name="Image" required>
                                             <label for="file-1" id="file-1-preview">
                                                 <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
                                                 <div>
@@ -49,7 +62,7 @@
                                             </label>
                                         </div>
                                         <div class="form-element">
-                                            <input type="file" id="file-2" accept="image/*" name="Image">
+                                            <input type="file" id="file-2" accept="image/*" name="Image" required>
                                             <label for="file-2" id="file-2-preview">
                                                 <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
                                                 <div>
@@ -58,7 +71,7 @@
                                             </label>
                                         </div>
                                         <div class="form-element">
-                                            <input type="file" id="file-3" accept="image/*" name="Image">
+                                            <input type="file" id="file-3" accept="image/*" name="Image" required>
                                             <label for="file-3" id="file-3-preview">
                                                 <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
                                                 <div>
@@ -67,7 +80,7 @@
                                             </label>
                                         </div>
                                         <div class="form-element">
-                                            <input type="file" id="file-4" accept="image/*" name="Image">
+                                            <input type="file" id="file-4" accept="image/*" name="Image" required>
                                             <label for="file-4" id="file-4-preview">
                                                 <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
                                                 <div>
@@ -94,5 +107,5 @@
 
 <script src="/Admin/js/custom.js"></script>
 <script>
-    $("#add-product").validate();
+    $("#add_product").validate();
 </script>

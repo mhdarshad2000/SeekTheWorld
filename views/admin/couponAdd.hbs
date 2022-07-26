@@ -16,7 +16,7 @@
                     {{#if exist}}
                     <p class="text-danger">Coupon Exist</p>
                     {{/if}}
-                    <input type="text" name="couponName" class="form-control" placeholder="" id="first" requird>
+                    <input type="text" name="couponName" class="form-control" placeholder="" id="first" required>
                 </div>
         </div>
         <!--  col-md-6   -->
@@ -40,7 +40,7 @@
         <div class="col-md-6">
            <div class="form-group">
                 <label for="phone">Coupon Limit</label>
-                <input type="Number" name="limit" class="form-control" id="phone" >
+                <input type="Number" name="limit" class="form-control" id="limit" required>
             </div>
         </div>
         <!--  col-md-6   -->
@@ -57,7 +57,7 @@
     <div class="form-row form_img">
         <div class="grid">
             <div class="form-element">
-                <input type="file" id="file-1" accept="image/*" name="Image">
+                <input type="file" id="file-1" accept="image/*" name="Image" required>
                 <label for="file-1" id="file-1-preview">
                     <img src="/dummy-post-square-1-thegem-blog-masonry.jpg" class="w-100 h-100" alt="">
                     <div>
@@ -90,7 +90,7 @@
   '#couponExpire',
   {
       altInput: true,
-
+      minDate: new Date(),
       allowInput: true,
       altFormat: 'F j, Y',
       dateFormat: 'Y-m-d',
